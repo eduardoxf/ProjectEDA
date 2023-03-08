@@ -56,7 +56,7 @@ void login(ListElem accounts, account_info* logged_account) {
 	ListElem Elem_buf = { 0 };
 
 	system("cls");
-	printf("\t-----------[LOG IN]-----------\n");
+	printf("\t\033[0;34m-----------[LOG IN]-----------\n");
 	printf("\t Insert NIF: ");
 	gets_s(str_buf, MAX_PASSWORD_SIZE);
 	aux_buf->nif = atoi(str_buf);

@@ -29,7 +29,12 @@ int main() {
 		login(accounts, &logged_account);
 	}
 
-	main_menu(&logged_account);
+	if (logged_account.type == ADMIN) {
+		admin_main_menu(&logged_account);
+	}
+	else if (logged_account.type == CLIENT) {
+		client_main_menu(&logged_account);
+	}
 
 	return 0;
 }
