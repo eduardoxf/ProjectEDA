@@ -37,3 +37,5 @@ void cpyAccountData(account_info* data1, account_info* data2);
 int compare_account(account_info* data1, account_info* data2);
 
 ListElem read_accounts(ListElem accounts_llist);
+
+void login(ListElem accounts, account_info* logged_account);

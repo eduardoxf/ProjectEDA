@@ -1,25 +1,30 @@
 #include "menus.h"
 
-void login(ListElem accounts,account_info* logged_account) {
+void main_menu(account_info* logged_account) {
+	unsigned char menu_option = NONE;
 
-
-	char str_buf[MAX_PASSWORD_SIZE] = { 0 };
-	account_info* aux_buf = malloc(sizeof(account_info));
-	ListElem Elem_buf = { 0 };
-
-	system("cls");
-	printf("-----------[LOG IN]-----------\n");
-	printf("Insert NIF: ");
-	gets_s(str_buf, MAX_PASSWORD_SIZE);
-	aux_buf->nif = atoi(str_buf);
-
-	printf("Insert Password: ");
-	gets_s(aux_buf->password, MAX_PASSWORD_SIZE);
-
-	Elem_buf = findItemIterative(accounts,aux_buf, &compare_account);
-	if (Elem_buf != NULL) {
-		cpyAccountData(logged_account, Elem_buf->data);
+	while (menu_option != EXIT_MENU) {
+		system("cls");
+		printf("\t\033[0;34m----------[ MENU ]----------\t\t \033[0;36mLogged Account\n");
+		printf("\t\033[0;34m  %c  - Manage Accounts\t\t\t   \033[0;36mName: %s\n", MANAGE_ACCOUNTS,logged_account->name);
+		printf("\t\033[0;34m  %c  - Manage Transports\t\t   \033[0;36mNIF: %d\n", MANAGE_TRANSPORTS, logged_account->nif);
+		printf("\t\033[0;34m  ESC - EXIT\t\t\t\t   \033[0;36mBalance: %d\n", logged_account->balance);
+		printf("\t\t\t\t\t\t   \033[0;36mResidence: %s\n", logged_account->residence);
+		menu_option = _getch();
+		menu_option = toupper(menu_option);
+		switch (menu_option) {
+		case MANAGE_ACCOUNTS:
+			account_menu(logged_account);
+			break;
+		case MANAGE_TRANSPORTS:
+			printf("transports");
+			_getch();
+			break;
+		}
 	}
-	
-	free(aux_buf);
 }
+
+void account_menu(account_info* logged_account) {
+
+}
+
