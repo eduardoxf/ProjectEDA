@@ -48,7 +48,7 @@ ListElem read_accounts(ListElem accounts_llist) {
 	return accounts_llist;
 }
 
-void create_account(ListElem accounts_llist, account_info* new_account_data) {
+ListElem create_account(ListElem accounts, account_info* new_account_data) {
 	FILE* fd;
 
 	fd = fopen(ACCOUNTS_FILE, "a");
@@ -61,10 +61,12 @@ void create_account(ListElem accounts_llist, account_info* new_account_data) {
 			new_account_data->balance,
 			new_account_data->residence,
 			new_account_data->password);
+		
+		accounts = addItemHead(accounts, new_account_data);
 		fclose(fd);
 	}
 
-	addItemHead(accounts_llist, new_account_data);
+	return accounts;
 }
 
 void login(ListElem accounts, account_info* logged_account) {

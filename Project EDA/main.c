@@ -23,18 +23,19 @@ int main() {
 	ListElem accounts = NULL;
 
 	accounts = read_accounts(accounts);
-	showListIterative(accounts, &show_data);
 
 	while (logged_account.nif == NULL) {
 		login(accounts, &logged_account);
 	}
 
 	if (logged_account.type == ADMIN) {
-		admin_main_menu(accounts, &logged_account);
+		accounts = admin_main_menu(accounts, &logged_account);
 	}
 	else if (logged_account.type == CLIENT) {
 		client_main_menu(accounts, &logged_account);
 	}
+
+	showListIterative(accounts, &show_data);
 
 	return 0;
 }

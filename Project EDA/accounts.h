@@ -35,4 +35,4 @@ ListElem read_accounts(ListElem accounts_llist);
 
 void login(ListElem accounts, account_info* logged_account);
 
-void create_account(ListElem accounts_llist, account_info* new_account_data);
+ListElem create_account(ListElem accounts, account_info* new_account_data);

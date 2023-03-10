@@ -1,9 +1,8 @@
 Eduardo:1:255003221:70:Rua Fujacal n∫43 2∫Esq Tr·s:f3515aw5:
 ZÈ:0:255013211:69:Rua Fujacal n∫42 2∫Esq Tr·s:123violas123:
 Bruna:1:696969696:2001:Rua Fujacal n∫44 2∫Esq Tr·s:verdejacare:
-ola:-1169715552:-1169715548:-1169715544:ola:fa:
-hello:-973762944:-973762940:-973762936:rua:fa:
-olas:0:123:0:rua:fa:
-Eduardoxf:1:255044124:0:Rua Fujacal 2Esq Tras:face300aa:
-êduardoxf:1:231:0:RuÔ+ josÇ:ß:
-:0:0:0:2ß::
+eduardoxf:1:2001:0:Rua Fujacal Nß41 2ßEsq Tr†s:face300aa:
+Jo∆o Lopes:0:255044211:32:Bracara Augusta:ze123:
+Jo∆ozinho:0:255031121:0:Rua do Raio nß102:gomas123:
+231:0:1231:0:rwq:rqw:
+Gonáalo:1:999999999:2001:Rua Fujacal :azul:

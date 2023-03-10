@@ -33,9 +33,9 @@
 
 void client_main_menu(account_info* logged_account);
 
-void admin_main_menu(account_info* logged_account);
+ListElem admin_main_menu(ListElem accounts_llist, account_info* logged_account);
 
-void account_menu(account_info* logged_account);
+ListElem account_menu(ListElem accounts_llist, account_info* logged_account);
 
 void transport_menu(account_info* logged_account);
 

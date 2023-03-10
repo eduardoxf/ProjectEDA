@@ -22,7 +22,7 @@ void client_main_menu(ListElem accounts_llist, account_info* logged_account) {
 	}
 }
 
-void admin_main_menu(ListElem accounts_llist, account_info* logged_account) {
+ListElem admin_main_menu(ListElem accounts_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -36,16 +36,17 @@ void admin_main_menu(ListElem accounts_llist, account_info* logged_account) {
 		menu_option = toupper(menu_option);
 		switch (menu_option) {
 		case MANAGE_ACCOUNTS:
-			account_menu(accounts_llist, logged_account);
+			accounts_llist = account_menu(accounts_llist, logged_account);
 			break;
 		case MANAGE_TRANSPORTS:
 			transport_menu(logged_account);
 			break;
 		}
 	}
+	return accounts_llist;
 }
 
-void account_menu(ListElem accounts_llist, account_info* logged_account) {
+ListElem account_menu(ListElem accounts_llist, account_info* logged_account) {
 	unsigned char account_menu_option = NONE;
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
@@ -84,7 +85,7 @@ void account_menu(ListElem accounts_llist, account_info* logged_account) {
 			printf("\t\033[0;34mInsert Password:\n");
 			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
 
-			create_account(accounts_llist,data_buf);
+			accounts_llist = create_account(accounts_llist, data_buf);
 			break;
 		case DELETE_ACCOUNT:
 			break;
@@ -92,7 +93,7 @@ void account_menu(ListElem accounts_llist, account_info* logged_account) {
 			break;
 		}
 	}
-
+	return accounts_llist;
 }
 
 void transport_menu(account_info* logged_account) {
