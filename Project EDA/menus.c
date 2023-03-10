@@ -1,6 +1,6 @@
 #include "menus.h"
 
-void client_main_menu(account_info* logged_account) {
+void client_main_menu(ListElem accounts_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -22,7 +22,7 @@ void client_main_menu(account_info* logged_account) {
 	}
 }
 
-void admin_main_menu(account_info* logged_account) {
+void admin_main_menu(ListElem accounts_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -36,7 +36,7 @@ void admin_main_menu(account_info* logged_account) {
 		menu_option = toupper(menu_option);
 		switch (menu_option) {
 		case MANAGE_ACCOUNTS:
-			account_menu(logged_account);
+			account_menu(accounts_llist, logged_account);
 			break;
 		case MANAGE_TRANSPORTS:
 			transport_menu(logged_account);
@@ -45,10 +45,12 @@ void admin_main_menu(account_info* logged_account) {
 	}
 }
 
-void account_menu(account_info* logged_account) {
+void account_menu(ListElem accounts_llist, account_info* logged_account) {
 	unsigned char account_menu_option = NONE;
+	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
 	while (account_menu_option != EXIT_MENU) {
+		account_info* data_buf = malloc(sizeof(account_info));
 		system("cls");
 		printf("\t\033[0;34m-------------[ MENU ]-------------\t \033[0;36mLogged Account\n");
 		printf("\t\033[0;34m  %c  - Create Account\t\t\t   \033[0;36mName: %s\n", CREATE_ACCOUNT, logged_account->name);
@@ -59,6 +61,30 @@ void account_menu(account_info* logged_account) {
 		account_menu_option = toupper(account_menu_option);
 		switch (account_menu_option) {
 		case CREATE_ACCOUNT:
+			
+			system("cls");
+			printf("\t\033[0;34mInsert Account Name:\n");
+			gets_s(data_buf->name, MAX_NAME_SIZE);
+
+			printf("\t\033[0;34mIs the new account an Admin?(1 - Yes,0 - No)\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->type = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert NIF:\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->nif = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert Balance:\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->balance = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert Residence:\n");
+			gets_s(data_buf->residence, MAX_NAME_SIZE);
+
+			printf("\t\033[0;34mInsert Password:\n");
+			gets_s(data_buf->password, MAX_NAME_SIZE);
+
+			create_account(accounts_llist,data_buf);
 			break;
 		case DELETE_ACCOUNT:
 			break;
@@ -66,6 +92,7 @@ void account_menu(account_info* logged_account) {
 			break;
 		}
 	}
+
 }
 
 void transport_menu(account_info* logged_account) {

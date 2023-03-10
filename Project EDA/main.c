@@ -30,10 +30,10 @@ int main() {
 	}
 
 	if (logged_account.type == ADMIN) {
-		admin_main_menu(&logged_account);
+		admin_main_menu(accounts, &logged_account);
 	}
 	else if (logged_account.type == CLIENT) {
-		client_main_menu(&logged_account);
+		client_main_menu(accounts, &logged_account);
 	}
 
 	return 0;

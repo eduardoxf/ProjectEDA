@@ -48,6 +48,25 @@ ListElem read_accounts(ListElem accounts_llist) {
 	return accounts_llist;
 }
 
+void create_account(ListElem accounts_llist, account_info* new_account_data) {
+	FILE* fd;
+
+	fd = fopen(ACCOUNTS_FILE, "a");
+
+	if (fd != NULL) {
+		fprintf(fd, "\n%s:%d:%d:%d:%s:%s:",
+			new_account_data->name,
+			new_account_data->type,
+			new_account_data->nif,
+			new_account_data->balance,
+			new_account_data->residence,
+			new_account_data->password);
+		fclose(fd);
+	}
+
+	addItemHead(accounts_llist, new_account_data);
+}
+
 void login(ListElem accounts, account_info* logged_account) {
 
 
