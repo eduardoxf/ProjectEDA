@@ -79,10 +79,10 @@ void account_menu(ListElem accounts_llist, account_info* logged_account) {
 			data_buf->balance = atoi(str_buf);
 
 			printf("\t\033[0;34mInsert Residence:\n");
-			gets_s(data_buf->residence, MAX_NAME_SIZE);
+			gets_s(data_buf->residence, MAX_RESIDENCE_SIZE);
 
 			printf("\t\033[0;34mInsert Password:\n");
-			gets_s(data_buf->password, MAX_NAME_SIZE);
+			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
 
 			create_account(accounts_llist,data_buf);
 			break;

@@ -8,9 +8,9 @@
 #include "ll.h"
 
 /* Should be at least the same size of the biggest data in the accounts data structure */
-#define MAX_BUFFERS_SIZE 100
+#define MAX_BUFFERS_SIZE 75
 #define MAX_NAME_SIZE 30
-#define MAX_RESIDENCE_SIZE 50
+#define MAX_RESIDENCE_SIZE 75
 #define MAX_PASSWORD_SIZE 30
 
 #define ADMIN 1
