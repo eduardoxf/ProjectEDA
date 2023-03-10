@@ -46,9 +46,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="accounts.txt">
-      <Filter>Arquivos de Recurso</Filter>
-    </Text>
     <Text Include="accounts1.txt">
       <Filter>Arquivos de Recurso</Filter>
     </Text>

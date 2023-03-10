@@ -20,7 +20,7 @@ int main() {
 
 	account_info logged_account = { 0 };
 	ListElem accounts = NULL;
-
+	
 	read_accounts(&accounts);
 
 	login_menu(&accounts, &logged_account);

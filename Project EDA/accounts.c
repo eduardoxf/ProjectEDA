@@ -6,9 +6,9 @@ void cpy_account_data(account_info* data1, account_info* data2) {
 		data1->balance = data2->balance;
 		data1->nif = data2->nif;
 		data1->type = data2->type;
-		strcpy(data1->name, data2->name);
-		strcpy(data1->password, data2->password);
-		strcpy(data1->residence, data2->residence);
+		strcpy_s(data1->name, MAX_NAME_SIZE, data2->name);
+		strcpy_s(data1->password, MAX_PASSWORD_SIZE, data2->password);
+		strcpy_s(data1->residence, MAX_RESIDENCE_SIZE, data2->residence);
 		
 	}
 }
@@ -53,7 +53,7 @@ void create_account(ListElem* accounts, account_info* new_account_data) {
 	fd = fopen(ACCOUNTS_FILE, "a");
 
 	if (fd != NULL) {
-		fprintf(fd, "\n%s:%d:%d:%d:%s:%s:",
+		fprintf(fd, "%s:%d:%d:%d:%s:%s:\n",
 			new_account_data->name,
 			new_account_data->type,
 			new_account_data->nif,
@@ -66,25 +66,41 @@ void create_account(ListElem* accounts, account_info* new_account_data) {
 	}
 }
 
-void login(ListElem* accounts, account_info* logged_account) {
+void save_accounts(ListElem accounts) {
+	FILE* fd;
+	fd = fopen(ACCOUNTS_FILE, "w");
+	account_info* account_data = NULL;
 
-	char str_buf[MAX_PASSWORD_SIZE] = { 0 };
-	account_info* aux_buf = malloc(sizeof(account_info));
+	if (fd != NULL) {
+		while (accounts != NULL) {
+			account_data = accounts->data;
+			fprintf(fd, "%s:%d:%d:%d:%s:%s:\n",
+				account_data->name,
+				account_data->type, 
+				account_data->nif,
+				account_data->balance,
+				account_data->residence,
+				account_data->password);
+
+			accounts = accounts->next;
+		}
+		fclose(fd);
+	}
+}
+
+void delete_account(ListElem* accounts, account_info* account_data) {
+
+	*accounts = removeItemIterative(*accounts, account_data, &compare_account);
+	
+	save_accounts(*accounts);
+}
+
+void login(ListElem* accounts, account_info* logged_account, account_info* data) {
+
 	ListElem Elem_buf = { 0 };
 
-	system("cls");
-	printf("\t\033[0;34m-----------[LOG IN]-----------\n");
-	printf("\t Insert NIF: ");
-	gets_s(str_buf, MAX_PASSWORD_SIZE);
-	aux_buf->nif = atoi(str_buf);
-
-	printf("\t Insert Password: ");
-	gets_s(aux_buf->password, MAX_PASSWORD_SIZE);
-
-	Elem_buf = findItemIterative(*accounts, aux_buf, &compare_account);
+	Elem_buf = findItemIterative(*accounts, data, &compare_account);
 	if (Elem_buf != NULL) {
 		cpy_account_data(logged_account, Elem_buf->data);
 	}
-
-	free(aux_buf);
 }

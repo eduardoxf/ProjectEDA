@@ -33,6 +33,10 @@ int compare_account(account_info* data1, account_info* data2);
 
 void read_accounts(ListElem* accounts_llist);
 
-void login(ListElem accounts, account_info* logged_account);
+void login(ListElem* accounts, account_info* logged_account, account_info* data);
+
+void delete_account(ListElem* accounts, account_info* account_data);
 
 void create_account(ListElem* accounts, account_info* new_account_data);
+
+void save_accounts(ListElem accounts);

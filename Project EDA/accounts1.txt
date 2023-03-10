@@ -1,3 +1,4 @@
+Bruna:0:696969696:0:verdejacare:verdejacare:
 Eduardo:1:255003221:70:Rua Fujacal nº43 2ºEsq Trás:f3515aw5:
 Zé:0:255013211:69:Rua Fujacal nº42 2ºEsq Trás:123violas123:
-Bruna:1:696969696:2001:Rua Fujacal nº44 2ºEsq Trás:verdejacare:
+Eduardoxf:1:2001:0:Rua do Fujacal N§41 2§ Esquerdo de Tr+as:face300aa:

@@ -5,12 +5,13 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
 	while (logged_account->nif == NULL) {
+		account_info* data_buf = malloc(sizeof(account_info));
+
 		system("cls");
 		printf("\t\033[0;34mCreate new Account?(%c-yes,%c-no)", SIGN_UP, LOGIN);
 		menu_option = _getch();
 		menu_option = toupper(menu_option);
 
-		account_info* data_buf = malloc(sizeof(account_info));
 		switch (menu_option)
 		{
 		case SIGN_UP:
@@ -33,12 +34,23 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 
 			create_account(accounts_llist, data_buf);
 			break;
+
 		case LOGIN:
-			login(accounts_llist, logged_account);
+
+			system("cls");
+			printf("\t\033[0;34m-----------[LOG IN]-----------\n");
+			printf("\t Insert NIF: ");
+			gets_s(str_buf, MAX_PASSWORD_SIZE);
+			data_buf->nif = atoi(str_buf);
+
+			printf("\t Insert Password: ");
+			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
+
+			login(accounts_llist, logged_account, data_buf);
+			free(data_buf);
 			break;
 		}
 	}
-	
 }
 
 void client_main_menu(ListElem* accounts_llist, account_info* logged_account) {
@@ -128,6 +140,17 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			create_account(accounts_llist, data_buf);
 			break;
 		case DELETE_ACCOUNT:
+			system("cls");
+
+			printf("\t\033[0;34mInsert NIF:\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->nif = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert Password:\n");
+			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
+
+			delete_account(accounts_llist, data_buf);
+			free(data_buf);
 			break;
 		case EDIT_ACCOUNT:
 			break;
