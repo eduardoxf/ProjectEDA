@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <locale.h>
-#include <Windows.h>
 #include "accounts.h"
 #include "menus.h"
 #include "ll.h"
@@ -16,7 +15,7 @@ void show_data(account_info* data) {
 }
 
 int main() {
-	
+
 	setlocale(LC_ALL, "Portuguese");
 
 	account_info logged_account = { 0 };
@@ -24,9 +23,7 @@ int main() {
 
 	read_accounts(&accounts);
 
-	while (logged_account.nif == NULL) {
-		login(accounts, &logged_account);
-	}
+	login_menu(&accounts, &logged_account);
 
 	if (logged_account.type == ADMIN) {
 		admin_main_menu(&accounts, &logged_account);

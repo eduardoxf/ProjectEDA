@@ -27,7 +27,7 @@ typedef struct {
 	char password[MAX_PASSWORD_SIZE];
 }account_info;
 
-void cpyAccountData(account_info* data1, account_info* data2);
+void cpy_account_data(account_info* data1, account_info* data2);
 
 int compare_account(account_info* data1, account_info* data2);
 

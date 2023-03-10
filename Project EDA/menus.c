@@ -1,5 +1,46 @@
 #include "menus.h"
 
+void login_menu(ListElem* accounts_llist, account_info* logged_account) {
+	unsigned char menu_option = NONE;
+	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
+
+	while (logged_account->nif == NULL) {
+		system("cls");
+		printf("\t\033[0;34mCreate new Account?(%c-yes,%c-no)", SIGN_UP, LOGIN);
+		menu_option = _getch();
+		menu_option = toupper(menu_option);
+
+		account_info* data_buf = malloc(sizeof(account_info));
+		switch (menu_option)
+		{
+		case SIGN_UP:
+			data_buf->type = CLIENT;
+			data_buf->balance = 0;
+
+			system("cls");
+			printf("\t\033[0;34mInsert Account Name:\n");
+			gets_s(data_buf->name, MAX_NAME_SIZE);
+
+			printf("\t\033[0;34mInsert NIF:\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->nif = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert Residence:\n");
+			gets_s(data_buf->residence, MAX_RESIDENCE_SIZE);
+
+			printf("\t\033[0;34mInsert Password:\n");
+			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
+
+			create_account(accounts_llist, data_buf);
+			break;
+		case LOGIN:
+			login(accounts_llist, logged_account);
+			break;
+		}
+	}
+	
+}
+
 void client_main_menu(ListElem* accounts_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 

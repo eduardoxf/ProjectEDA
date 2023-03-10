@@ -1,6 +1,6 @@
 #include "accounts.h"
 
-void cpyAccountData(account_info* data1, account_info* data2) {
+void cpy_account_data(account_info* data1, account_info* data2) {
 	if (data1 != NULL && data2 != NULL) {
 
 		data1->balance = data2->balance;
@@ -39,7 +39,7 @@ void read_accounts(ListElem* accounts_llist) {
 																	aux_buf.password) != EOF) {
 			account_info* aux = malloc(sizeof(account_info));
 
-			cpyAccountData(aux,&aux_buf);
+			cpy_account_data(aux,&aux_buf);
 
 			*accounts_llist = addItemHead(*accounts_llist, aux);
 		}
@@ -66,8 +66,7 @@ void create_account(ListElem* accounts, account_info* new_account_data) {
 	}
 }
 
-void login(ListElem accounts, account_info* logged_account) {
-
+void login(ListElem* accounts, account_info* logged_account) {
 
 	char str_buf[MAX_PASSWORD_SIZE] = { 0 };
 	account_info* aux_buf = malloc(sizeof(account_info));
@@ -82,9 +81,9 @@ void login(ListElem accounts, account_info* logged_account) {
 	printf("\t Insert Password: ");
 	gets_s(aux_buf->password, MAX_PASSWORD_SIZE);
 
-	Elem_buf = findItemIterative(accounts, aux_buf, &compare_account);
+	Elem_buf = findItemIterative(*accounts, aux_buf, &compare_account);
 	if (Elem_buf != NULL) {
-		cpyAccountData(logged_account, Elem_buf->data);
+		cpy_account_data(logged_account, Elem_buf->data);
 	}
 
 	free(aux_buf);

@@ -9,6 +9,10 @@
 #define NONE 0 
 #define EXIT_MENU 27
 
+/* Login menu options */
+#define SIGN_UP 'Y'
+#define LOGIN 'N'
+
 /* Client main menu options */
 #define RENT_TRANSPORT 'R'
 #define LIST_TRANSPORTS 'L'
@@ -30,6 +34,8 @@
 /* List Transports menu options */
 #define LIST_TRANSPORTS_BY_AUTONOMY 'A'
 #define LIST_TRANSPORTS_BY_LOCATION 'L'
+
+void login_menu(ListElem* accounts_llist, account_info* logged_account);
 
 void client_main_menu(ListElem* accounts_llist, account_info* logged_account);
 
