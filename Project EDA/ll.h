@@ -46,6 +46,8 @@ ListElem deleteList(ListElem head);
 // Element on the list on specific position
 ListElem obtainElementPosition(ListElem head, int pos);
 
+void editItemData(ListElem item_to_edit, void* new_data);
+
 ListElem findItemIterative(ListElem head, void* data, int (*compare)(void* data1, void* data2));
 
 

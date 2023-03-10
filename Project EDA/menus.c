@@ -153,6 +153,37 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			free(data_buf);
 			break;
 		case EDIT_ACCOUNT:
+			
+
+			system("cls");
+			printf("\t\033[0;34mInsert NIF of account to edit:\n");
+			account_info account_to_edit_data = { 0 };
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			account_to_edit_data.nif = atoi(str_buf);
+
+			system("cls");
+			printf("\t\033[0;34mInsert Account Name:\n");
+			gets_s(data_buf->name, MAX_NAME_SIZE);
+
+			printf("\t\033[0;34mIs the new account an Admin?(1 - Yes,0 - No)\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->type = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert NIF:\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->nif = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert Balance:\n");
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->balance = atoi(str_buf);
+
+			printf("\t\033[0;34mInsert Residence:\n");
+			gets_s(data_buf->residence, MAX_RESIDENCE_SIZE);
+
+			printf("\t\033[0;34mInsert Password:\n");
+			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
+
+			edit_account(accounts_llist, &account_to_edit_data, data_buf);
 			break;
 		}
 	}

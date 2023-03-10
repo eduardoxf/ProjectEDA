@@ -14,7 +14,7 @@
 #define MAX_PASSWORD_SIZE 30
 
 #define ADMIN 1
-#define CLIENT 0
+#define CLIENT 2
 
 #define ACCOUNTS_FILE "accounts1.txt"
 
@@ -29,14 +29,18 @@ typedef struct {
 
 void cpy_account_data(account_info* data1, account_info* data2);
 
-int compare_account(account_info* data1, account_info* data2);
+unsigned int compare_account_nif(account_info* data1, account_info* data2);
+
+unsigned int compare_account_pass_nif(account_info* data1, account_info* data2);
 
 void read_accounts(ListElem* accounts_llist);
 
 void login(ListElem* accounts, account_info* logged_account, account_info* data);
 
-void delete_account(ListElem* accounts, account_info* account_data);
+void delete_account(ListElem* accounts, account_info* data_of_account_to_delete);
 
 void create_account(ListElem* accounts, account_info* new_account_data);
+
+void edit_account(ListElem* accounts, account_info* data_to_find_account, account_info* new_data);
 
 void save_accounts(ListElem accounts);

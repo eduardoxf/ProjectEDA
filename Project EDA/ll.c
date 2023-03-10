@@ -168,3 +168,9 @@ ListElem findItemIterative(ListElem head, void* data, int (*compare)(void* data1
 	}
 	return NULL;
 }
+
+void editItemData(ListElem item_to_edit, void* new_data) {
+	void* aux = item_to_edit->data;
+	item_to_edit->data = new_data;
+	free(aux);
+}

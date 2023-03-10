@@ -13,7 +13,16 @@ void cpy_account_data(account_info* data1, account_info* data2) {
 	}
 }
 
-unsigned int compare_account(account_info* data1, account_info* data2) {
+unsigned int compare_account_nif(account_info* data1, account_info* data2) {
+	if (data1->nif == data2->nif) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+unsigned int compare_account_pass_nif(account_info* data1, account_info* data2) {
 
 	if (data1->nif == data2->nif && strcmp(data1->password, data2->password) == 0) {
 		return 1;
@@ -88,19 +97,46 @@ void save_accounts(ListElem accounts) {
 	}
 }
 
-void delete_account(ListElem* accounts, account_info* account_data) {
+void delete_account(ListElem* accounts, account_info* data_of_account_to_delete) {
 
-	*accounts = removeItemIterative(*accounts, account_data, &compare_account);
+	*accounts = removeItemIterative(*accounts, data_of_account_to_delete, &compare_account_pass_nif);
 	
 	save_accounts(*accounts);
 }
 
-void login(ListElem* accounts, account_info* logged_account, account_info* data) {
+void edit_account(ListElem* accounts, account_info* data_to_find_account, account_info* new_data) {
+	ListElem account_to_edit = { 0 };
+	account_info* current_account_data;
+	
+	account_to_edit = findItemIterative(*accounts, data_to_find_account, &compare_account_nif);
+	current_account_data = account_to_edit->data;
 
-	ListElem Elem_buf = { 0 };
+	if (new_data->name[0] == 0) {
+		strcpy(new_data->name, current_account_data->name);
+	}
+	if (new_data->nif == 0) {
+		new_data->nif = current_account_data->nif;
+	}
+	if (new_data->password[0] == 0) {
+		strcpy(new_data->password, current_account_data->password);
+	}
+	if (new_data->residence[0] == 0) {
+		strcpy(new_data->residence, current_account_data->residence);
+	}
+	if (new_data->nif == 0) {
+		new_data->nif = current_account_data->nif;
+	}
 
-	Elem_buf = findItemIterative(*accounts, data, &compare_account);
-	if (Elem_buf != NULL) {
-		cpy_account_data(logged_account, Elem_buf->data);
+	editItemData(account_to_edit,new_data);
+	save_accounts(*accounts);
+}
+
+void login(ListElem* accounts, account_info* logged_account, account_info* data_to_find_account) {
+
+	ListElem account_to_login = { 0 };
+
+	account_to_login = findItemIterative(*accounts, data_to_find_account, &compare_account_pass_nif);
+	if (account_to_login != NULL) {
+		cpy_account_data(logged_account, account_to_login->data);
 	}
 }
