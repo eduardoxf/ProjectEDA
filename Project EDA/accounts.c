@@ -21,7 +21,7 @@ unsigned int compare_account(account_info* data1, account_info* data2) {
 	return 0;
 }
 
-ListElem read_accounts(ListElem accounts_llist) {
+void read_accounts(ListElem* accounts_llist) {
 
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
@@ -41,14 +41,13 @@ ListElem read_accounts(ListElem accounts_llist) {
 
 			cpyAccountData(aux,&aux_buf);
 
-			accounts_llist = addItemHead(accounts_llist, aux);
+			*accounts_llist = addItemHead(*accounts_llist, aux);
 		}
 		fclose(fd);
 	}
-	return accounts_llist;
 }
 
-ListElem create_account(ListElem accounts, account_info* new_account_data) {
+void create_account(ListElem* accounts, account_info* new_account_data) {
 	FILE* fd;
 
 	fd = fopen(ACCOUNTS_FILE, "a");
@@ -62,11 +61,9 @@ ListElem create_account(ListElem accounts, account_info* new_account_data) {
 			new_account_data->residence,
 			new_account_data->password);
 		
-		accounts = addItemHead(accounts, new_account_data);
+		*accounts = addItemHead(*accounts, new_account_data);
 		fclose(fd);
 	}
-
-	return accounts;
 }
 
 void login(ListElem accounts, account_info* logged_account) {
