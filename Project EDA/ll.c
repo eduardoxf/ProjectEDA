@@ -148,7 +148,7 @@ ListElem addItemOrderedRecursive(ListElem head, void *data, int (*compare)(void 
 }
 
 ListElem findItemIterative(ListElem head, void* data, int (*compare)(void* data1, void* data2)) {
-	ListElem aux, prev;
+	ListElem prev;
 
 	// List is empty
 	if (head == NULL)

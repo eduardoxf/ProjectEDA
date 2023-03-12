@@ -16,7 +16,7 @@
 #define ADMIN 1
 #define CLIENT 2
 
-#define ACCOUNTS_FILE "accounts1.txt"
+#define ACCOUNTS_FILE "accounts.txt"
 
 typedef struct {
 	char name[MAX_NAME_SIZE];

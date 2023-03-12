@@ -1,23 +1,29 @@
 #pragma once
 
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "ll.h"
+
 #define SCOOTER 1
 #define BYCICLE 2
 
-typedef struct {
-	float longi;
-	float lati;
-}coordinates;
+#define SCOOTER_COST 1.34
+#define BYCICLE_COST 0.82
 
-typedef struct {
-	coordinates north_corner;
-	coordinates south_corner;
-}map_chunk;
+#define TRANSPORTS_FILE "transports.txt"
+
+#define MAX_GEOCODE_SIZE 30
 
 typedef struct transports_data_s{
 	unsigned int id;
 	unsigned int type;
 	unsigned int battery;
-	unsigned int autonomia;
-	float custo;
-	coordinates location;
+	unsigned int autonomy;
+	char geocode[MAX_GEOCODE_SIZE];
 }transports_data;
+
+void cpy_transport_data(transports_data* data1, transports_data* data2);
+
+void read_transports(ListElem* transports);

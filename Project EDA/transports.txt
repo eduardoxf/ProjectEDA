@@ -1,0 +1,4 @@
+1:1:100:250:nozes.tijolo.cabelão:
+2:1:90:200:alusão.mamutes.regra:
+1:2:96:213:machos.arados.doada:
+1:1:20:82:coco.viram.balé:

@@ -4,7 +4,7 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
-	while (logged_account->nif == NULL) {
+	while (logged_account->nif == 0) {
 		account_info* data_buf = malloc(sizeof(account_info));
 
 		system("cls");
@@ -119,7 +119,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			printf("\t\033[0;34mInsert Account Name:\n");
 			gets_s(data_buf->name, MAX_NAME_SIZE);
 
-			printf("\t\033[0;34mIs the new account an Admin?(1 - Yes,0 - No)\n");
+			printf("\t\033[0;34mIs the new account an Admin?(%d - Yes,%d - No)\n", ADMIN, CLIENT);
 			gets_s(str_buf, MAX_BUFFERS_SIZE);
 			data_buf->type = atoi(str_buf);
 
@@ -165,7 +165,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			printf("\t\033[0;34mInsert Account Name:\n");
 			gets_s(data_buf->name, MAX_NAME_SIZE);
 
-			printf("\t\033[0;34mIs the new account an Admin?(1 - Yes,0 - No)\n");
+			printf("\t\033[0;34mIs the new account an Admin?(%d - Yes,%d - No)\n", ADMIN, CLIENT);
 			gets_s(str_buf, MAX_BUFFERS_SIZE);
 			data_buf->type = atoi(str_buf);
 

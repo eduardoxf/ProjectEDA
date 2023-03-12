@@ -140,7 +140,8 @@
     <ClInclude Include="transp.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="accounts1.txt" />
+    <Text Include="accounts.txt" />
+    <Text Include="transports.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
