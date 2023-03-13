@@ -1,3 +1,4 @@
-203:2:0:0:sair.pneus.valeu:
+125:2:0:0:ola.z‚:
+123:1:100:250:batata.doce.arroz:
 1:2:96:213:machos.arados.doada:
 1:1:100:250:nozes.tijolo.cabelão:

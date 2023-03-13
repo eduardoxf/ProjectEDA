@@ -19,8 +19,8 @@ void show_transports_data(transports_data* data) {
 	printf("ID: %d\n", data->id);
 	printf("Type: %d\n", data->type);
 	printf("Balance: %d\n", data->battery);
-	printf("Admin: %d\n", data->autonomy);
-	printf("Password: %s\n", data->geocode);
+	printf("Autonomy: %d\n", data->autonomy);
+	printf("Geocode: %s\n", data->geocode);
 	printf("\n");
 }
 

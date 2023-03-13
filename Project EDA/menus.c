@@ -190,6 +190,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 
 void transport_menu(ListElem* transports, account_info* logged_account) {
 	unsigned char transport_menu_option = NONE;
+	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
 	while (transport_menu_option != EXIT_MENU) {
 		transports_data* data_buf = malloc(sizeof(account_info));
@@ -206,19 +207,23 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 		case CREATE_TRANSPORT:
 			system("cls");
 			printf("\t\033[0;34mInsert Transport ID:\n");
-			scanf("%d", &data_buf->id);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->id = atoi(str_buf);
 
 			printf("\t\033[0;34mDefine what type of transport: (%d - Scooter,%d - Bycicle)\n", SCOOTER, BYCICLE);
-			scanf("%d", &data_buf->type);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->type = atoi(str_buf);
 
 			printf("\t\033[0;34mInsert Battery:\n");
-			scanf("%d", &data_buf->battery);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->battery = atoi(str_buf);
 
 			printf("\t\033[0;34mInsert Autonomy:\n");
-			scanf("%d", &data_buf->autonomy);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->autonomy = atoi(str_buf);
 
 			printf("\t\033[0;34mInsert Geocode:\n");
-			scanf("%s", data_buf->geocode);
+			gets_s(data_buf->geocode, MAX_GEOCODE_SIZE);
 
 			create_transport(transports, data_buf);
 			break;
@@ -226,7 +231,9 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 
 			system("cls");
 			printf("\t\033[0;34mInsert ID:\n");
-			scanf("%d", &data_buf->id);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->id = atoi(str_buf);
+
 			delete_transport(transports, data_buf);
 			free(data_buf);
 			break;
@@ -235,30 +242,31 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 			system("cls");
 			printf("\t\033[0;34mInsert ID of account to edit:\n");
 			transports_data transport_to_edit_data = { 0 };
-			scanf("%d", &transport_to_edit_data.id);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			transport_to_edit_data.id = atoi(str_buf);
 
 			system("cls");
 			printf("\t\033[0;34mInsert new ID:\n");
-			scanf("%d", &data_buf->id);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->id = atoi(str_buf);
 
 			printf("\t\033[0;34mInsert new transport Type: (%d - Scooter,%d - Bycicle)\n", SCOOTER, BYCICLE);
-			scanf("%d", &data_buf->type);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->type = atoi(str_buf);
 
 			printf("\t\033[0;34mInsert new battery:\n");
-			scanf("%d", &data_buf->battery);
-
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->battery = atoi(str_buf);
+		
 			printf("\t\033[0;34mInsert new autonomy:\n");
-			scanf("%d", &data_buf->autonomy);
+			gets_s(str_buf, MAX_BUFFERS_SIZE);
+			data_buf->autonomy = atoi(str_buf);
 
-			/*printf("\t\033[0;34mInsert new Coordenates:\n");
-			scanf("%s", &data_buf->id);*/
+			printf("\t\033[0;34mInsert new Geocode:\n");
+			gets_s(data_buf->geocode, MAX_GEOCODE_SIZE);
 
 			edit_transport(transports, &transport_to_edit_data, data_buf);
 
-			
-
-			
-			
 			break;
 		case LIST_TRANSPORTS:
 			list_transport_menu(logged_account);
