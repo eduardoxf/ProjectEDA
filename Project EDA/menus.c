@@ -223,6 +223,12 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 			create_transport(transports, data_buf);
 			break;
 		case DELETE_TRANSPORT:
+
+			system("cls");
+			printf("\t\033[0;34mInsert ID:\n");
+			scanf("%d", &data_buf->id);
+			delete_transport(transports, data_buf);
+			free(data_buf);
 			break;
 		case EDIT_TRANSPORT:
 			break;

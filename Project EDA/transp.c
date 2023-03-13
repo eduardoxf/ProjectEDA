@@ -1,5 +1,15 @@
 #include "transp.h"
 
+
+int compare_transports_id(transports_data* data1, transports_data* data2) {
+	if (data1->id == data2->id) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
 void cpy_transport_data(transports_data* data1, transports_data* data2) {
 	if (data1 != NULL && data2 != NULL) {
 
@@ -49,4 +59,33 @@ void create_transport(ListElem* transports, transports_data* new_transport_data)
 		*transports = addItemHead(*transports, new_transport_data);
 		fclose(fd);
 	}
+}
+
+void save_transports(ListElem transports) {
+	FILE* fd;
+	fd = fopen(TRANSPORTS_FILE, "w");
+	transports_data* transport_data = NULL;
+
+	if (fd != NULL) {
+		while (transports != NULL) {
+			transport_data = transports->data;
+			fprintf(fd, "%d:%d:%d:%d:%s:\n",
+				transport_data->id,
+				transport_data->type,
+				transport_data->battery,
+				transport_data->autonomy,
+				transport_data->geocode);
+
+			transports = transports->next;
+		}
+		fclose(fd);
+	}
+}
+
+
+void delete_transport(ListElem* transports, transports_data* data_of_transport_to_delete) {
+
+	*transports = removeItemIterative(*transports, data_of_transport_to_delete, &compare_transports_id);
+
+	save_transports(*transports);
 }

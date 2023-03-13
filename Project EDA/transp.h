@@ -24,8 +24,14 @@ typedef struct transports_data_s{
 	char geocode[MAX_GEOCODE_SIZE];
 }transports_data;
 
+int compare_transports_id(transports_data* data1 , transports_data* data2);
+
 void cpy_transport_data(transports_data* data1, transports_data* data2);
 
 void read_transports(ListElem* transports);
 
 void create_transport(ListElem* transports, transports_data* new_transport_data);
+
+void save_transports(ListElem transports);
+
+void delete_transport(ListElem* transports, transports_data* data_of_transport_to_delete);
