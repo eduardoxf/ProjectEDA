@@ -1,10 +1,13 @@
 #pragma once
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <conio.h>
 #include "accounts.h"
+#include "transp.h"
 
 /* General menu options */
 #define NONE 0 
@@ -40,10 +43,10 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account);
 
 void client_main_menu(ListElem* accounts_llist, account_info* logged_account);
 
-void admin_main_menu(ListElem* accounts_llist, account_info* logged_account);
+void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, account_info* logged_account);
 
 void account_menu(ListElem* accounts_llist, account_info* logged_account);
 
-void transport_menu(account_info* logged_account);
+void transport_menu(ListElem* transports, account_info* logged_account);
 
 void list_transport_menu(account_info* logged_account);

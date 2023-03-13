@@ -27,3 +27,5 @@ typedef struct transports_data_s{
 void cpy_transport_data(transports_data* data1, transports_data* data2);
 
 void read_transports(ListElem* transports);
+
+void create_transport(ListElem* transports, transports_data* new_transport_data);

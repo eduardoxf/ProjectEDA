@@ -75,7 +75,7 @@ void client_main_menu(ListElem* accounts_llist, account_info* logged_account) {
 	}
 }
 
-void admin_main_menu(ListElem* accounts_llist, account_info* logged_account) {
+void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -92,7 +92,7 @@ void admin_main_menu(ListElem* accounts_llist, account_info* logged_account) {
 			account_menu(accounts_llist, logged_account);
 			break;
 		case MANAGE_TRANSPORTS:
-			transport_menu(logged_account);
+			transport_menu(transports_llist, logged_account);
 			break;
 		}
 	}
@@ -154,7 +154,6 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			break;
 		case EDIT_ACCOUNT:
 			
-
 			system("cls");
 			printf("\t\033[0;34mInsert NIF of account to edit:\n");
 			account_info account_to_edit_data = { 0 };
@@ -189,10 +188,11 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 	}
 }
 
-void transport_menu(account_info* logged_account) {
+void transport_menu(ListElem* transports, account_info* logged_account) {
 	unsigned char transport_menu_option = NONE;
 
 	while (transport_menu_option != EXIT_MENU) {
+		transports_data* data_buf = malloc(sizeof(account_info));
 		system("cls");
 		printf("\t\033[0;34m-------------[ MENU ]-------------\t \033[0;36mLogged Account\n");
 		printf("\t\033[0;34m  %c  - Add Transport\t\t\t   \033[0;36mName: %s\n", CREATE_TRANSPORT, logged_account->name);
@@ -204,6 +204,23 @@ void transport_menu(account_info* logged_account) {
 		transport_menu_option = toupper(transport_menu_option);
 		switch (transport_menu_option) {
 		case CREATE_TRANSPORT:
+			system("cls");
+			printf("\t\033[0;34mInsert Transport ID:\n");
+			scanf("%d", &data_buf->id);
+
+			printf("\t\033[0;34mDefine what type of transport: (%d - Scooter,%d - Bycicle)\n", SCOOTER, BYCICLE);
+			scanf("%d", &data_buf->type);
+
+			printf("\t\033[0;34mInsert Battery:\n");
+			scanf("%d", &data_buf->battery);
+
+			printf("\t\033[0;34mInsert Autonomy:\n");
+			scanf("%d", &data_buf->autonomy);
+
+			printf("\t\033[0;34mInsert Geocode:\n");
+			scanf("%s", data_buf->geocode);
+
+			create_transport(transports, data_buf);
 			break;
 		case DELETE_TRANSPORT:
 			break;

@@ -36,19 +36,19 @@ int main() {
 
 	read_transports(&transports);
 
-	showListIterative(transports, &show_transports_data);
+	//showListIterative(transports, &show_transports_data);
 
 	login_menu(&accounts, &logged_account);
 
 	if (logged_account.type == ADMIN) {
-		admin_main_menu(&accounts, &logged_account);
+		admin_main_menu(&accounts, &transports, &logged_account);
 	}
 	else if (logged_account.type == CLIENT) {
 		client_main_menu(&accounts, &logged_account);
 	}
 
-	showListIterative(accounts, &show_accounts_data);
-	
+	//showListIterative(accounts, &show_accounts_data);
+	showListIterative(transports, &show_transports_data);
 
 	return 0;
 }

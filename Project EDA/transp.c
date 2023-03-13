@@ -32,3 +32,21 @@ void read_transports(ListElem* transports) {
 		fclose(fd);
 	}
 }
+
+void create_transport(ListElem* transports, transports_data* new_transport_data) {
+	FILE* fd;
+
+	fd = fopen(TRANSPORTS_FILE, "a");
+
+	if (fd != NULL) {
+		fprintf(fd, "%d:%d:%d:%d:%s:\n",
+			new_transport_data->id,
+			new_transport_data->type,
+			new_transport_data->battery,
+			new_transport_data->autonomy,
+			new_transport_data->geocode);
+
+		*transports = addItemHead(*transports, new_transport_data);
+		fclose(fd);
+	}
+}
