@@ -231,6 +231,34 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 			free(data_buf);
 			break;
 		case EDIT_TRANSPORT:
+
+			system("cls");
+			printf("\t\033[0;34mInsert ID of account to edit:\n");
+			transports_data transport_to_edit_data = { 0 };
+			scanf("%d", &transport_to_edit_data.id);
+
+			system("cls");
+			printf("\t\033[0;34mInsert new ID:\n");
+			scanf("%d", &data_buf->id);
+
+			printf("\t\033[0;34mInsert new transport Type: (%d - Scooter,%d - Bycicle)\n", SCOOTER, BYCICLE);
+			scanf("%d", &data_buf->type);
+
+			printf("\t\033[0;34mInsert new battery:\n");
+			scanf("%d", &data_buf->battery);
+
+			printf("\t\033[0;34mInsert new autonomy:\n");
+			scanf("%d", &data_buf->autonomy);
+
+			/*printf("\t\033[0;34mInsert new Coordenates:\n");
+			scanf("%s", &data_buf->id);*/
+
+			edit_transport(transports, &transport_to_edit_data, data_buf);
+
+			
+
+			
+			
 			break;
 		case LIST_TRANSPORTS:
 			list_transport_menu(logged_account);

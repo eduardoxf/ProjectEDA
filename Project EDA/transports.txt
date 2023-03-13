@@ -1,4 +1,3 @@
-1:1:100:250:nozes.tijolo.cabelão:
-1:2:96:213:machos.arados.doada:
-123:2:99:247:camelo.bico.perda:
 203:2:0:0:sair.pneus.valeu:
+1:2:96:213:machos.arados.doada:
+1:1:100:250:nozes.tijolo.cabelão:

@@ -35,3 +35,5 @@ void create_transport(ListElem* transports, transports_data* new_transport_data)
 void save_transports(ListElem transports);
 
 void delete_transport(ListElem* transports, transports_data* data_of_transport_to_delete);
+
+void edit_transport(ListElem* transports, transports_data* data_to_find_transport, transports_data* new_data);

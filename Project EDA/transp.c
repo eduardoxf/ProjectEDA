@@ -89,3 +89,21 @@ void delete_transport(ListElem* transports, transports_data* data_of_transport_t
 
 	save_transports(*transports);
 }
+
+void edit_transport(ListElem* transports, transports_data* data_to_find_transport, transports_data* new_data) {
+	ListElem transport_to_edit = { 0 };
+	transports_data* current_transport_data;
+
+	transport_to_edit = findItemIterative(*transports, data_to_find_transport, &compare_transports_id);
+	current_transport_data = transport_to_edit->data;
+
+	if (new_data->id == 0) {
+		new_data->id = current_transport_data->id;
+	}
+	if (new_data->type == 0) {
+		new_data->type = current_transport_data->type;
+	}
+
+	editItemData(transport_to_edit, new_data);
+	save_transports(*transports);
+}
