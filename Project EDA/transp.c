@@ -107,3 +107,39 @@ void edit_transport(ListElem* transports, transports_data* data_to_find_transpor
 	editItemData(transport_to_edit, new_data);
 	save_transports(*transports);
 }
+
+int compare_transports_autonomy(transports_data* data1, transports_data* data2) {
+	if (data1->autonomy>data2->autonomy) {
+		return -1;
+	}
+	else if (data1->autonomy < data2->autonomy) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+void show_transports_data(transports_data* data) {
+	printf("ID: %d\n", data->id);
+	printf("Type: %d\n", data->type);
+	printf("Balance: %d\n", data->battery);
+	printf("Autonomy: %d\n", data->autonomy);
+	printf("Geocode: %s\n", data->geocode);
+	printf("\n");
+}
+
+void list_transports_by_autonomy(ListElem transports) {
+	ListElem show_transport_list = NULL;
+	while (transports != NULL) {
+		transports_data* data_buf = malloc(sizeof(transports_data));
+		cpy_transport_data(data_buf, transports->data);
+		show_transport_list = addItemOrderedIterative(show_transport_list, data_buf, &compare_transports_autonomy);
+		transports = transports->next;
+	}
+	showListIterative(show_transport_list, &show_transports_data);
+	show_transport_list = deleteList(show_transport_list);
+
+	printf("Press any key to continue...");
+	_getch();
+}

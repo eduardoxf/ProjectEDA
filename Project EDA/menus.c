@@ -53,7 +53,7 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 	}
 }
 
-void client_main_menu(ListElem* accounts_llist, account_info* logged_account) {
+void client_main_menu(ListElem* transports_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -67,7 +67,7 @@ void client_main_menu(ListElem* accounts_llist, account_info* logged_account) {
 		menu_option = toupper(menu_option);
 		switch (menu_option) {
 		case LIST_TRANSPORTS:
-			list_transport_menu(logged_account);
+			list_transport_menu(transports_llist, logged_account);
 			break;
 		case RENT_TRANSPORT:
 			break;
@@ -269,13 +269,13 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 
 			break;
 		case LIST_TRANSPORTS:
-			list_transport_menu(logged_account);
+			list_transport_menu(transports, logged_account);
 			break;
 		}
 	}
 }
 
-void list_transport_menu(account_info* logged_account) {
+void list_transport_menu(ListElem* transports, account_info* logged_account) {
 	unsigned char list_transport_menu_option = NONE;
 	while (list_transport_menu_option!=EXIT_MENU)
 	{
@@ -289,6 +289,7 @@ void list_transport_menu(account_info* logged_account) {
 		list_transport_menu_option = toupper(list_transport_menu_option);
 		switch (list_transport_menu_option) {
 		case LIST_TRANSPORTS_BY_AUTONOMY:
+			list_transports_by_autonomy(*transports);
 			break;
 		case LIST_TRANSPORTS_BY_LOCATION:
 			break;

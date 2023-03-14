@@ -174,3 +174,13 @@ void editItemData(ListElem item_to_edit, void* new_data) {
 	item_to_edit->data = new_data;
 	free(aux);
 }
+
+ListElem deleteList(ListElem head) {
+	ListElem aux = NULL;
+	while (head != NULL) {
+		aux = head;
+		head = head->next;
+		free(aux);
+	}
+	return head;
+}

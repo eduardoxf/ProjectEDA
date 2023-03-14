@@ -15,15 +15,6 @@ void show_accounts_data(account_info* data) {
 	printf("\n");
 }
 
-void show_transports_data(transports_data* data) {
-	printf("ID: %d\n", data->id);
-	printf("Type: %d\n", data->type);
-	printf("Balance: %d\n", data->battery);
-	printf("Autonomy: %d\n", data->autonomy);
-	printf("Geocode: %s\n", data->geocode);
-	printf("\n");
-}
-
 int main() {
 
 	setlocale(LC_ALL, "Portuguese");
@@ -36,18 +27,15 @@ int main() {
 
 	read_transports(&transports);
 
-	//showListIterative(transports, &show_transports_data);
-
 	login_menu(&accounts, &logged_account);
 
 	if (logged_account.type == ADMIN) {
 		admin_main_menu(&accounts, &transports, &logged_account);
 	}
 	else if (logged_account.type == CLIENT) {
-		client_main_menu(&accounts, &logged_account);
+		client_main_menu(&transports, &logged_account);
 	}
 
-	//showListIterative(accounts, &show_accounts_data);
 	showListIterative(transports, &show_transports_data);
 
 	return 0;

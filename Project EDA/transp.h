@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include "ll.h"
 
 #define SCOOTER 1
@@ -37,3 +38,9 @@ void save_transports(ListElem transports);
 void delete_transport(ListElem* transports, transports_data* data_of_transport_to_delete);
 
 void edit_transport(ListElem* transports, transports_data* data_to_find_transport, transports_data* new_data);
+
+void show_transports_data(transports_data* data);
+
+int compare_transports_autonomy(transports_data* data1, transports_data* data2);
+
+void list_transports_by_autonomy(ListElem transports);
