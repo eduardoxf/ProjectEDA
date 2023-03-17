@@ -306,7 +306,6 @@ void rent_transport_menu(ListElem* rental_transports, ListElem transports, accou
 	printf("\tInsert Transport ID to rent:");
 	gets_s(str_buf, MAX_BUFFERS_SIZE);
 	transport_id_to_rent = atoi(str_buf);
-	_getch();
 
 	rent_transport(rental_transports, transports, logged_account, transport_id_to_rent);
 

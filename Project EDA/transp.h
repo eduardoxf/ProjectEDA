@@ -7,6 +7,7 @@
 #include <conio.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "ll.h"
 #include "accounts.h"
 
@@ -75,3 +76,5 @@ unsigned int compare_rent_transport_id(transports_rent* data1, transports_rent* 
 unsigned int compare_rent_client_nif(transports_rent* data1, transports_rent* data2);
 
 void stop_rent_transport(ListElem* rental_transports, account_info* logged_account);
+
+void read_rents(ListElem* rental_transports);

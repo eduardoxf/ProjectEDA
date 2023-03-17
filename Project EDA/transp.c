@@ -180,10 +180,11 @@ unsigned int start_rent_transport(ListElem* rental_transports,ListElem transport
 		new_transport_rent->rent_cost = 0;
 
 		save_transport_rent(rental_transports, new_transport_rent);
-
+		free(aux_buf);
 		return TRANSPORT_RENTED;
 	}
 	else {
+		free(aux_buf);
 		return TRANSPORT_NOT_FOUND;
 	}
 }
@@ -217,13 +218,15 @@ void rent_transport(ListElem* rental_transports, ListElem transports, account_in
 	account_already_rent = findItemIterative(*rental_transports, &data_buf, &compare_rent_client_nif);
 
 	if (transport_already_rented == NULL && account_already_rent == NULL) {
+
 		if (start_rent_transport(rental_transports, transports, *logged_account, transport_id) != TRANSPORT_RENTED) {
 			printf("Transport ID Incorrect\n");
 		}
 	}
 	else if (account_already_rent != NULL){
-		printf("Account Already Rent want to finish the rent? (%d - Yes, %d - No)\n", YES_OPTION, NO_OPTION);
-		scanf("%c", &option);
+		printf("Account Already Rent want to finish the rent? (%c - Yes, %c - No)\n", YES_OPTION, NO_OPTION);
+		option = _getch();
+		option = toupper(option);
 		if (option == YES_OPTION) {
 			stop_rent_transport(rental_transports, logged_account);
 		}
@@ -240,7 +243,7 @@ void save_rents(ListElem rental_transports) {
 	transports_rent* rent_data = malloc(sizeof(transports_rent));
 
 	if (fd != NULL) {
-		while (rental_transports !=NULL)
+		while (rental_transports != NULL)
 		{	
 			rent_data = rental_transports->data;
 			fprintf(fd, "%d:%d:%lld:%lld:%f:\n",
@@ -249,8 +252,12 @@ void save_rents(ListElem rental_transports) {
 				rent_data->start_rent_time,
 				rent_data->final_rent_time,
 				rent_data->rent_cost);
+
 			rental_transports = rental_transports->next;
 		}
+
+		free(rent_data);
+		fclose(fd);
 	}
 }
 
@@ -261,4 +268,39 @@ void stop_rent_transport(ListElem* rental_transports, account_info* logged_accou
 	*rental_transports = removeItemIterative(*rental_transports, &data_buf, &compare_rent_client_nif);
 
 	save_rents(*rental_transports);
+}
+
+void cpy_rent_data(transports_rent* data1, transports_rent* data2) {
+	if (data1 != NULL && data2 != NULL) {
+		data1->client_nif = data2->client_nif;
+		data1->transport_id = data2->transport_id;
+		data1->start_rent_time = data2->start_rent_time;
+		data1->final_rent_time = data2->final_rent_time;
+		data1->rent_cost = data2->rent_cost;
+	}
+}
+
+void read_rents(ListElem* rental_transports) {
+	FILE* fd;
+	fd = fopen(RENTALS_FILE, "r");
+
+	transports_rent data_buf = { 0 };
+
+	if (fd != NULL) {
+
+		while (fscanf(fd, "%d:%d:%lld:%lld:%f:\n",
+			&data_buf.client_nif,
+			&data_buf.transport_id,
+			&data_buf.start_rent_time,
+			&data_buf.final_rent_time,
+			&data_buf.rent_cost) != EOF) {
+
+			transports_rent* rent_data = malloc(sizeof(transports_rent));
+
+			cpy_rent_data(rent_data, &data_buf);
+
+			*rental_transports = addItemHead(*rental_transports, rent_data);
+		}
+		fclose(fd);
+	}
 }
