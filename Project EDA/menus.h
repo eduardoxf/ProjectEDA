@@ -41,7 +41,7 @@
 
 void login_menu(ListElem* accounts_llist, account_info* logged_account);
 
-void client_main_menu(ListElem* transports_llist, account_info* logged_account);
+void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, account_info* logged_account);
 
 void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, account_info* logged_account);
 
@@ -50,3 +50,5 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account);
 void transport_menu(ListElem* transports, account_info* logged_account);
 
 void list_transport_menu(ListElem* transports, account_info* logged_account);
+
+void rent_transport_menu(ListElem* rental_transports, ListElem transports, account_info* logged_account);

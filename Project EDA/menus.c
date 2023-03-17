@@ -53,7 +53,7 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 	}
 }
 
-void client_main_menu(ListElem* transports_llist, account_info* logged_account) {
+void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -70,6 +70,8 @@ void client_main_menu(ListElem* transports_llist, account_info* logged_account) 
 			list_transport_menu(transports_llist, logged_account);
 			break;
 		case RENT_TRANSPORT:
+			rent_transport_menu(rental_transports, *transports_llist, logged_account);
+			//start_rent_transport(rental_transports, *transports_llist, *logged_account, 125);
 			break;
 		}
 	}
@@ -81,7 +83,7 @@ void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, accou
 	while (menu_option != EXIT_MENU) {
 		system("cls");
 		printf("\t\033[0;34m-------------[ MENU ]-------------\t \033[0;36mLogged Account\n");
-		printf("\t\033[0;34m  %c  - Manage Accounts\t\t\t   \033[0;36mName: %s\n", MANAGE_ACCOUNTS,logged_account->name);
+		printf("\t\033[0;34m  %c  - Manage Accounts\t\t\t   \033[0;36mName: %s\n", MANAGE_ACCOUNTS, logged_account->name);
 		printf("\t\033[0;34m  %c  - Manage Transports\t\t   \033[0;36mNIF: %d\n", MANAGE_TRANSPORTS, logged_account->nif);
 		printf("\t\033[0;34m  ESC - EXIT\t\t\t\t   \033[0;36mBalance: %d\n", logged_account->balance);
 		printf("\t\t\t\t\t\t   \033[0;36mResidence: %s\n", logged_account->residence);
@@ -114,7 +116,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 		account_menu_option = toupper(account_menu_option);
 		switch (account_menu_option) {
 		case CREATE_ACCOUNT:
-			
+
 			system("cls");
 			printf("\t\033[0;34mInsert Account Name:\n");
 			gets_s(data_buf->name, MAX_NAME_SIZE);
@@ -153,7 +155,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			free(data_buf);
 			break;
 		case EDIT_ACCOUNT:
-			
+
 			system("cls");
 			printf("\t\033[0;34mInsert NIF of account to edit:\n");
 			account_info account_to_edit_data = { 0 };
@@ -257,7 +259,7 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 			printf("\t\033[0;34mInsert new battery:\n");
 			gets_s(str_buf, MAX_BUFFERS_SIZE);
 			data_buf->battery = atoi(str_buf);
-		
+
 			printf("\t\033[0;34mInsert new autonomy:\n");
 			gets_s(str_buf, MAX_BUFFERS_SIZE);
 			data_buf->autonomy = atoi(str_buf);
@@ -277,7 +279,7 @@ void transport_menu(ListElem* transports, account_info* logged_account) {
 
 void list_transport_menu(ListElem* transports, account_info* logged_account) {
 	unsigned char list_transport_menu_option = NONE;
-	while (list_transport_menu_option!=EXIT_MENU)
+	while (list_transport_menu_option != EXIT_MENU)
 	{
 		system("cls");
 		printf("\t\033[0;34m-------------[ MENU ]-------------\t \033[0;36mLogged Account\n");
@@ -297,3 +299,15 @@ void list_transport_menu(ListElem* transports, account_info* logged_account) {
 	}
 }
 
+void rent_transport_menu(ListElem* rental_transports, ListElem transports, account_info* logged_account) {
+	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
+	unsigned int transport_id_to_rent = 0;
+	system("cls");
+	printf("\tInsert Transport ID to rent:");
+	gets_s(str_buf, MAX_BUFFERS_SIZE);
+	transport_id_to_rent = atoi(str_buf);
+	_getch();
+
+	rent_transport(rental_transports, transports, logged_account, transport_id_to_rent);
+
+}

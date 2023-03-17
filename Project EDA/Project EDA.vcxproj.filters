@@ -52,5 +52,8 @@
     <Text Include="transports.txt">
       <Filter>Arquivos de Recurso</Filter>
     </Text>
+    <Text Include="rentals.txt">
+      <Filter>Arquivos de Recurso</Filter>
+    </Text>
   </ItemGroup>
 </Project>

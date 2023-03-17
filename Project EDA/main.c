@@ -22,7 +22,8 @@ int main() {
 	account_info logged_account = { 0 };
 	ListElem accounts = NULL;
 	ListElem transports = NULL;
-	
+	ListElem rental_transports = NULL;
+
 	read_accounts(&accounts);
 
 	read_transports(&transports);
@@ -33,7 +34,7 @@ int main() {
 		admin_main_menu(&accounts, &transports, &logged_account);
 	}
 	else if (logged_account.type == CLIENT) {
-		client_main_menu(&transports, &logged_account);
+		client_main_menu(&rental_transports, &transports, &logged_account);
 	}
 
 	showListIterative(transports, &show_transports_data);
