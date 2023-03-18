@@ -44,3 +44,5 @@ void create_account(ListElem* accounts, account_info* new_account_data);
 void edit_account(ListElem* accounts, account_info* data_to_find_account, account_info* new_data);
 
 void save_accounts(ListElem accounts);
+
+void add_balance_account(ListElem* accounts, account_info* logged_account, int balance_to_sum);

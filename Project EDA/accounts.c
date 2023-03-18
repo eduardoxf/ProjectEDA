@@ -140,3 +140,19 @@ void login(ListElem* accounts, account_info* logged_account, account_info* data_
 		cpy_account_data(logged_account, account_to_login->data);
 	}
 }
+
+void add_balance_account(ListElem* accounts, account_info* logged_account, int balance_to_sum) {
+	account_info* data_buf = NULL;
+	ListElem account_to_add_balance = NULL;
+
+	account_to_add_balance = findItemIterative(*accounts, logged_account, &compare_account_nif);
+
+	if (account_to_add_balance != NULL) {
+		data_buf = account_to_add_balance->data;
+
+		data_buf->balance += balance_to_sum;
+		logged_account->balance += balance_to_sum;
+
+		save_accounts(*accounts);
+	}
+}

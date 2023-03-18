@@ -21,6 +21,7 @@
 /* Client main menu options */
 #define RENT_TRANSPORT 'R'
 #define LIST_TRANSPORTS 'L'
+#define ADD_BALANCE 'B'
 
 /* Admin main menu options */
 #define MANAGE_ACCOUNTS 'A'

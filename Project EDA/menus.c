@@ -55,14 +55,15 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 
 void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, ListElem* accounts, account_info* logged_account) {
 	unsigned char menu_option = NONE;
+	int balance_buf = 0;
 
 	while (menu_option != EXIT_MENU) {
 		system("cls");
 		printf("\t\033[0;34m-------------[ MENU ]-------------\t \033[0;36mLogged Account\n");
 		printf("\t\033[0;34m  %c  - List Transports\t\t\t   \033[0;36mName: %s\n", LIST_TRANSPORTS, logged_account->name);
 		printf("\t\033[0;34m  %c  - Rent Transport\t\t\t   \033[0;36mNIF: %d\n", RENT_TRANSPORT, logged_account->nif);
-		printf("\t\033[0;34m  ESC - EXIT\t\t\t\t   \033[0;36mBalance: %d\n", logged_account->balance);
-		printf("\t\t\t\t\t\t   \033[0;36mResidence: %s\n", logged_account->residence);
+		printf("\t\033[0;34m  %c - Add Balance\t\t\t   \033[0;36mBalance: %d\n", ADD_BALANCE, logged_account->balance);
+		printf("\t\033[0;34m  ESC - EXIT\t\t\t\t   \033[0;36mResidence: %s\n", logged_account->residence);
 		menu_option = _getch();
 		menu_option = toupper(menu_option);
 		switch (menu_option) {
@@ -71,6 +72,13 @@ void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, L
 			break;
 		case RENT_TRANSPORT:
 			rent_transport_menu(rental_transports, *transports_llist, accounts, logged_account);
+			break;
+		case ADD_BALANCE:
+			system("cls");
+			printf("\t\033[0;34mInsert Ammount to Recharge:\n ");
+			scanf("%d", &balance_buf);
+
+			add_balance_account(accounts, logged_account, balance_buf);
 			break;
 		}
 	}
