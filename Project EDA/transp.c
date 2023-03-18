@@ -82,7 +82,6 @@ void save_transports(ListElem transports) {
 	}
 }
 
-
 void delete_transport(ListElem* transports, transports_data* data_of_transport_to_delete) {
 
 	*transports = removeItemIterative(*transports, data_of_transport_to_delete, &compare_transports_id);
@@ -139,8 +138,15 @@ void list_transports_by_autonomy(ListElem transports) {
 	}
 	showListIterative(show_transport_list, &show_transports_data);
 	show_transport_list = deleteList(show_transport_list);
-
-	printf("Press any key to continue...");
-	_getch();
 }
 
+void list_transports_by_geocode(ListElem transports, char geocode[]) {
+	transports_data* data_buf = NULL;
+	while (transports != NULL) {
+		data_buf = transports->data;
+		if (strcmp(data_buf->geocode, geocode)==0) {
+			show_transports_data(data_buf);
+		}
+		transports = transports->next;
+	}
+}

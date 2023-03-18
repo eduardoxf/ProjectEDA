@@ -46,3 +46,4 @@ int compare_transports_autonomy(transports_data* data1, transports_data* data2);
 
 void list_transports_by_autonomy(ListElem transports);
 
+void list_transports_by_geocode(ListElem transports, char geocode[]);

@@ -278,6 +278,7 @@ void transport_menu(ListElem* transports, ListElem* accounts, account_info* logg
 
 void list_transport_menu(ListElem* transports, account_info* logged_account) {
 	unsigned char list_transport_menu_option = NONE;
+	char geocode_buf[MAX_GEOCODE_SIZE] = { 0 };
 	while (list_transport_menu_option != EXIT_MENU)
 	{
 		system("cls");
@@ -291,8 +292,17 @@ void list_transport_menu(ListElem* transports, account_info* logged_account) {
 		switch (list_transport_menu_option) {
 		case LIST_TRANSPORTS_BY_AUTONOMY:
 			list_transports_by_autonomy(*transports);
+			printf("Press any key to continue...");
+			_getch();
 			break;
 		case LIST_TRANSPORTS_BY_LOCATION:
+			system("cls");
+			printf("\t\033[0;34m Insert geocode:\n");
+			gets_s(geocode_buf, MAX_GEOCODE_SIZE);
+			system("cls");
+			list_transports_by_geocode(*transports, geocode_buf);
+			printf("Press any key to continue...\n");
+			_getch();
 			break;
 		}
 	}

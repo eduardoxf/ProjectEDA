@@ -82,7 +82,6 @@ void rent_transport(ListElem* rental_transports, ListElem transports, ListElem* 
 	data_buf.transport_id = transport_id;
 
 	transport_already_rented = findItemIterative(*rental_transports, &data_buf, &compare_rent_transport_id);
-	showListIterative(*rental_transports, &show_rents_data);
 	data_buf.client_nif = logged_account->nif;
 	account_already_rent = findItemIterative(*rental_transports, &data_buf, &compare_rent_client_nif);
 
