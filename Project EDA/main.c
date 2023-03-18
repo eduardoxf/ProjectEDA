@@ -43,13 +43,11 @@ int main() {
 
 	login_menu(&accounts, &logged_account);
 
-	
-
 	if (logged_account.type == ADMIN) {
 		admin_main_menu(&accounts, &transports, &logged_account);
 	}
 	else if (logged_account.type == CLIENT) {
-		client_main_menu(&rental_transports, &transports, &logged_account);
+		client_main_menu(&rental_transports, &transports, &accounts, &logged_account);
 	}
 
 	showListIterative(transports, &show_transports_data);

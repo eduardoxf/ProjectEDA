@@ -53,7 +53,7 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 	}
 }
 
-void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, account_info* logged_account) {
+void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, ListElem* accounts, account_info* logged_account) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -70,8 +70,7 @@ void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, a
 			list_transport_menu(transports_llist, logged_account);
 			break;
 		case RENT_TRANSPORT:
-			rent_transport_menu(rental_transports, *transports_llist, logged_account);
-			//start_rent_transport(rental_transports, *transports_llist, *logged_account, 125);
+			rent_transport_menu(rental_transports, *transports_llist, accounts, logged_account);
 			break;
 		}
 	}
@@ -94,7 +93,7 @@ void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, accou
 			account_menu(accounts_llist, logged_account);
 			break;
 		case MANAGE_TRANSPORTS:
-			transport_menu(transports_llist, logged_account);
+			transport_menu(transports_llist, accounts_llist, logged_account);
 			break;
 		}
 	}
@@ -190,7 +189,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 	}
 }
 
-void transport_menu(ListElem* transports, account_info* logged_account) {
+void transport_menu(ListElem* transports, ListElem* accounts, account_info* logged_account) {
 	unsigned char transport_menu_option = NONE;
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
@@ -299,7 +298,7 @@ void list_transport_menu(ListElem* transports, account_info* logged_account) {
 	}
 }
 
-void rent_transport_menu(ListElem* rental_transports, ListElem transports, account_info* logged_account) {
+void rent_transport_menu(ListElem* rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account) {
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 	unsigned int transport_id_to_rent = 0;
 	system("cls");
@@ -307,6 +306,6 @@ void rent_transport_menu(ListElem* rental_transports, ListElem transports, accou
 	gets_s(str_buf, MAX_BUFFERS_SIZE);
 	transport_id_to_rent = atoi(str_buf);
 
-	rent_transport(rental_transports, transports, logged_account, transport_id_to_rent);
+	rent_transport(rental_transports, transports, accounts, logged_account, transport_id_to_rent);
 
 }

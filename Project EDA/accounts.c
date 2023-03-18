@@ -114,8 +114,8 @@ void edit_account(ListElem* accounts, account_info* data_to_find_account, accoun
 	if (new_data->name[0] == 0) {
 		strcpy(new_data->name, current_account_data->name);
 	}
-	if (new_data->nif == 0) {
-		new_data->nif = current_account_data->nif;
+	if (new_data->type == 0) {
+		new_data->type = current_account_data->type;
 	}
 	if (new_data->password[0] == 0) {
 		strcpy(new_data->password, current_account_data->password);

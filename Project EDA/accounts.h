@@ -22,7 +22,7 @@ typedef struct {
 	char name[MAX_NAME_SIZE];
 	unsigned int type;
 	unsigned int nif;
-	unsigned int balance;
+	int balance;
 	char residence[MAX_RESIDENCE_SIZE];
 	char password[MAX_PASSWORD_SIZE];
 }account_info;

@@ -207,7 +207,7 @@ unsigned int compare_rent_client_nif(transports_rent* data1, transports_rent* da
 	}
 }
 
-void rent_transport(ListElem* rental_transports, ListElem transports, account_info* logged_account, unsigned int transport_id) {
+void rent_transport(ListElem* rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account, unsigned int transport_id) {
 	ListElem transport_already_rented = NULL;
 	ListElem account_already_rent = NULL;
 	transports_rent data_buf = { 0 };
@@ -217,23 +217,32 @@ void rent_transport(ListElem* rental_transports, ListElem transports, account_in
 	data_buf.client_nif = logged_account->nif;
 	account_already_rent = findItemIterative(*rental_transports, &data_buf, &compare_rent_client_nif);
 
-	if (transport_already_rented == NULL && account_already_rent == NULL) {
+	if (logged_account->balance > 0) {
+		if (transport_already_rented == NULL && account_already_rent == NULL) {
 
-		if (start_rent_transport(rental_transports, transports, *logged_account, transport_id) != TRANSPORT_RENTED) {
-			printf("Transport ID Incorrect\n");
+			if (start_rent_transport(rental_transports, transports, *logged_account, transport_id) != TRANSPORT_RENTED) {
+				printf("Transport ID Incorrect...\n");
+				_getch();
+			}
 		}
-	}
-	else if (account_already_rent != NULL){
-		printf("Account Already Rent want to finish the rent? (%c - Yes, %c - No)\n", YES_OPTION, NO_OPTION);
-		option = _getch();
-		option = toupper(option);
-		if (option == YES_OPTION) {
-			stop_rent_transport(rental_transports, logged_account);
+		else if (account_already_rent != NULL) {
+			printf("Account Already Rent want to finish the rent? (%c - Yes, %c - No)\n", YES_OPTION, NO_OPTION);
+			option = _getch();
+			option = toupper(option);
+			if (option == YES_OPTION) {
+				stop_rent_transport(rental_transports, transports, accounts, logged_account);
+			}
+		}
+		else {
+			printf("Transport Already Rented...\n");
+			_getch();
 		}
 	}
 	else {
-		printf("Transport Already Rented\n");
+		printf("Account doesnt have enough credit...\n");
+		_getch();
 	}
+	
 }
 
 
@@ -261,10 +270,56 @@ void save_rents(ListElem rental_transports) {
 	}
 }
 
-void stop_rent_transport(ListElem* rental_transports, account_info* logged_account) {
+void rent_payment(ListElem rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account) {
+
+	unsigned int cost = 0;
+	transports_rent* rental_data_buf = malloc(sizeof(transports_rent));
+	rental_data_buf->client_nif = logged_account->nif;
+
+	transports_data* transport_data_buf = malloc(sizeof(transports_data));
+
+	account_info* account_data_buf = NULL;
+
+	ListElem rental = NULL;
+	rental = findItemIterative(rental_transports, rental_data_buf, &compare_rent_client_nif);
+	free(rental_data_buf);
+
+	rental_data_buf = rental->data;
+	rental_data_buf->final_rent_time = time(NULL);
+	transport_data_buf->id = rental_data_buf->transport_id;
+
+	ListElem transport_rented = NULL;
+	transport_rented = findItemIterative(transports, transport_data_buf, &compare_transports_id);
+	free(transport_data_buf);
+
+	transport_data_buf = transport_rented->data;
+
+	ListElem account_that_rent;
+	account_that_rent = findItemIterative(*accounts, logged_account, compare_account_nif);
+
+	account_data_buf = account_that_rent->data;
+
+	if (transport_data_buf->type == SCOOTER) {
+		cost = (rental_data_buf->final_rent_time - rental_data_buf->start_rent_time) * SCOOTER_COST_SEC;
+	}
+	else if (transport_data_buf->type == BYCICLE) {
+		cost = (rental_data_buf->final_rent_time - rental_data_buf->start_rent_time) * BYCICLE_COST_SEC;
+	}
+
+	account_data_buf->balance -= cost;
+	logged_account->balance -= cost;
+
+	save_accounts(*accounts);
+}
+
+void stop_rent_transport(ListElem* rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account) {
 
 	transports_rent data_buf = { 0 };
+
 	data_buf.client_nif = logged_account->nif;
+
+	rent_payment(*rental_transports, transports, accounts, logged_account);
+
 	*rental_transports = removeItemIterative(*rental_transports, &data_buf, &compare_rent_client_nif);
 
 	save_rents(*rental_transports);

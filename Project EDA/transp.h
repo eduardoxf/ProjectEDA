@@ -14,8 +14,8 @@
 #define SCOOTER 1
 #define BYCICLE 2
 
-#define SCOOTER_COST 1.34
-#define BYCICLE_COST 0.82
+#define SCOOTER_COST_SEC 2
+#define BYCICLE_COST_SEC 1
 
 #define TRANSPORTS_FILE "transports.txt"
 #define RENTALS_FILE "rentals.txt"
@@ -69,12 +69,12 @@ void list_transports_by_autonomy(ListElem transports);
 
 unsigned int start_rent_transport(ListElem* rental_transports, ListElem transports, account_info logged_account, unsigned int transport_id);
 
-void rent_transport(ListElem* rental_transports, ListElem transports, account_info* logged_account, unsigned int transport_id);
+void rent_transport(ListElem* rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account, unsigned int transport_id);
 
 unsigned int compare_rent_transport_id(transports_rent* data1, transports_rent* data2);
 
 unsigned int compare_rent_client_nif(transports_rent* data1, transports_rent* data2);
 
-void stop_rent_transport(ListElem* rental_transports, account_info* logged_account);
+void stop_rent_transport(ListElem* rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account);
 
 void read_rents(ListElem* rental_transports);
