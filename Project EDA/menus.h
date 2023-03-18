@@ -8,6 +8,7 @@
 #include <conio.h>
 #include "accounts.h"
 #include "transp.h"
+#include "rents.h"
 
 /* General menu options */
 #define NONE 0 

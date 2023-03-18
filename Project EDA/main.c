@@ -15,15 +15,6 @@ void show_accounts_data(account_info* data) {
 	printf("\n");
 }
 
-void show_rents_data(transports_rent* data) {
-	printf("Client NIF: %d\n", data->client_nif);
-	printf("Transport ID: %d\n", data->transport_id);
-	printf("When was rented: %lld\n", data->start_rent_time);
-	printf("Finish Rent time: %lld\n", data->final_rent_time);
-	printf("Final Cost: %f\n", data->rent_cost);
-	printf("\n");
-}
-
 int main() {
 
 	setlocale(LC_ALL, "Portuguese");

@@ -131,12 +131,14 @@
     <ClCompile Include="ll.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menus.c" />
+    <ClCompile Include="rents.c" />
     <ClCompile Include="transp.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accounts.h" />
     <ClInclude Include="ll.h" />
     <ClInclude Include="menus.h" />
+    <ClInclude Include="rents.h" />
     <ClInclude Include="transp.h" />
   </ItemGroup>
   <ItemGroup>
