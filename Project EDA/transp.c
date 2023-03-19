@@ -1,6 +1,12 @@
 #include "transp.h"
 
-
+/* Compares if ID in data1 is equal to ID in data2
+* Arguments:
+* data1 - transport 1 data to compare
+* data2 - transport 2 data to compare
+* Returns:
+* 1 - IDs are equal
+* 2 - IDs are different							*/
 int compare_transports_id(transports_data* data1, transports_data* data2) {
 	if (data1->id == data2->id) {
 		return 1;
@@ -10,6 +16,10 @@ int compare_transports_id(transports_data* data1, transports_data* data2) {
 	}
 }
 
+/* Copies data from data2 and stores it in data1
+* Arguments:
+* data1 - transport data buffer that will store the information
+* data2 - transport data to copy								*/
 void cpy_transport_data(transports_data* data1, transports_data* data2) {
 	if (data1 != NULL && data2 != NULL) {
 
@@ -21,6 +31,9 @@ void cpy_transport_data(transports_data* data1, transports_data* data2) {
 	}
 }
 
+/* Reads transports in TRANSPORTS_FILE and stores it in transports linked list
+* Arguments:
+* transports - linked list where the transports will be stored             */
 void read_transports(ListElem* transports) {
 	FILE* fd;
 	fd = fopen(TRANSPORTS_FILE, "r");
@@ -43,6 +56,10 @@ void read_transports(ListElem* transports) {
 	}
 }
 
+/* Writes a transport in TRANSPORTS_FILE and adds it to transports linked list
+* Arguments:
+* transports - linked list that stores all transports
+* new_transport_data - data of transport to create					   	  */
 void create_transport(ListElem* transports, transports_data* new_transport_data) {
 	FILE* fd;
 
@@ -61,6 +78,9 @@ void create_transport(ListElem* transports, transports_data* new_transport_data)
 	}
 }
 
+/* Writes all transports in TRANSPORTS_FILE
+* Arguments:
+* transports - linked list that stores all transports */
 void save_transports(ListElem transports) {
 	FILE* fd;
 	fd = fopen(TRANSPORTS_FILE, "w");
@@ -82,6 +102,11 @@ void save_transports(ListElem transports) {
 	}
 }
 
+/* Deletes transport from TRANSPORTS_FILE and from the transports linked list
+* Arguments:
+* transports - linked list that stores all transports
+* data_of_transport_to_delete - stores data to know which transport is to delete
+*							   (stores id of transport to delete)             */
 void delete_transport(ListElem* transports, transports_data* data_of_transport_to_delete) {
 
 	*transports = removeItemIterative(*transports, data_of_transport_to_delete, &compare_transports_id);
@@ -89,6 +114,12 @@ void delete_transport(ListElem* transports, transports_data* data_of_transport_t
 	save_transports(*transports);
 }
 
+/* Edits data of an specific transport
+* Arguments:
+* transports - linked list that stores all transports
+* data_to_find_transport - stores data to know which transport is to edit
+*						   (stores Id of transport to edit)
+* new_data - stores the new data of the transport                    */
 void edit_transport(ListElem* transports, transports_data* data_to_find_transport, transports_data* new_data) {
 	ListElem transport_to_edit = { 0 };
 	transports_data* current_transport_data;
@@ -107,6 +138,14 @@ void edit_transport(ListElem* transports, transports_data* data_to_find_transpor
 	save_transports(*transports);
 }
 
+/* Compares if Autonomy in data1 is equal, greater or lesser to Autonomy in data2
+* Arguments:
+* data1 - transport 1 data to compare
+* data2 - transport 2 data to compare
+* Returns:
+* 1 - Data1 < Data2 autonomy
+* -1 - Data1 > Data2 autonomy
+* 0 - Data1 = Data2 autonomy													*/
 int compare_transports_autonomy(transports_data* data1, transports_data* data2) {
 	if (data1->autonomy>data2->autonomy) {
 		return -1;
@@ -119,6 +158,9 @@ int compare_transports_autonomy(transports_data* data1, transports_data* data2) 
 	}
 }
 
+/* Shows data of one transport
+* Arguments:
+* data - data to show     */
 void show_transports_data(transports_data* data) {
 	printf("ID: %d\n", data->id);
 	printf("Type: %d\n", data->type);
@@ -128,6 +170,9 @@ void show_transports_data(transports_data* data) {
 	printf("\n");
 }
 
+/* Lists transports in descending order of autonomy
+* Arguments:
+* transports - linked list that stores all transports */
 void list_transports_by_autonomy(ListElem transports) {
 	ListElem show_transport_list = NULL;
 	while (transports != NULL) {
@@ -140,6 +185,10 @@ void list_transports_by_autonomy(ListElem transports) {
 	show_transport_list = deleteList(show_transport_list);
 }
 
+/* Lists all transports with an specific geocode
+* Arguments:
+* transports - linked list that stores all transports
+* geocode - geocode of transports to list			*/
 void list_transports_by_geocode(ListElem transports, char geocode[]) {
 	transports_data* data_buf = NULL;
 	while (transports != NULL) {

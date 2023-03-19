@@ -1,5 +1,9 @@
 #include "accounts.h"
 
+/* Copies data from data2 and stores it in data1 
+* Arguments:
+* data1 - account data buffer that will store the information
+* data2 - account data to copy								*/
 void cpy_account_data(account_info* data1, account_info* data2) {
 	if (data1 != NULL && data2 != NULL) {
 
@@ -13,6 +17,13 @@ void cpy_account_data(account_info* data1, account_info* data2) {
 	}
 }
 
+/* Compares if Nif in data1 is equal to Nif in data2
+* Arguments:
+* data1 - account 1 data to compare
+* data2 - account 2 data to compare
+* Returns:
+* 1 - Nifs are equal
+* 0 - Nifs are different							*/
 unsigned int compare_account_nif(account_info* data1, account_info* data2) {
 	if (data1->nif == data2->nif) {
 		return 1;
@@ -22,6 +33,13 @@ unsigned int compare_account_nif(account_info* data1, account_info* data2) {
 	}
 }
 
+/* Compares if Nif and Password in data1 is equal to Nif and Password in data2
+* Argumens:
+* data1 - account 1 data to compare
+* data2 - account 2 data to compare
+* Returns:
+* 1 - Nifs and passwords are equal
+* 0 - Nifs and passwords are different										*/
 unsigned int compare_account_pass_nif(account_info* data1, account_info* data2) {
 
 	if (data1->nif == data2->nif && strcmp(data1->password, data2->password) == 0) {
@@ -30,6 +48,9 @@ unsigned int compare_account_pass_nif(account_info* data1, account_info* data2) 
 	return 0;
 }
 
+/* Reads accounts in ACCOUNTS_FILE and stores it in accounts_llist linked list 
+* Arguments:
+* accounts_llist - linked list where the accounts will be stored            */
 void read_accounts(ListElem* accounts_llist) {
 
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
@@ -56,6 +77,10 @@ void read_accounts(ListElem* accounts_llist) {
 	}
 }
 
+/* Writes a account in ACCOUNTS_FILE and adds it to accounts linked list 
+* Arguments:
+* acounts - linked list that stores all accounts 
+* new_account_data - data of account to create						  */
 void create_account(ListElem* accounts, account_info* new_account_data) {
 	FILE* fd;
 
@@ -75,6 +100,9 @@ void create_account(ListElem* accounts, account_info* new_account_data) {
 	}
 }
 
+/* Writes all accounts in ACCOUNTS_FILE
+* Arguments:
+* accounts - linked list that stores all accounts */
 void save_accounts(ListElem accounts) {
 	FILE* fd;
 	fd = fopen(ACCOUNTS_FILE, "w");
@@ -97,6 +125,11 @@ void save_accounts(ListElem accounts) {
 	}
 }
 
+/* Deletes account from ACCOUNTS_FILE and accounts linked list 
+* Arguments:
+* accounts - linked list that stores all accounts
+* data_of_account_to_delete - stores data to know which account is to delete
+*							  (stores nif of account to delete)           */
 void delete_account(ListElem* accounts, account_info* data_of_account_to_delete) {
 
 	*accounts = removeItemIterative(*accounts, data_of_account_to_delete, &compare_account_pass_nif);
@@ -104,6 +137,12 @@ void delete_account(ListElem* accounts, account_info* data_of_account_to_delete)
 	save_accounts(*accounts);
 }
 
+/* Edits data of an specific account 
+* Arguments:
+* accounts - linked list that stores all accounts 
+* data_to_find_account - stores data to know which account is to edit
+*						 (stores nif of account to edit)
+* new_data - stores the new data of the account                    */
 void edit_account(ListElem* accounts, account_info* data_to_find_account, account_info* new_data) {
 	ListElem account_to_edit = { 0 };
 	account_info* current_account_data;
@@ -131,6 +170,13 @@ void edit_account(ListElem* accounts, account_info* data_to_find_account, accoun
 	save_accounts(*accounts);
 }
 
+/* Executes the login based on NIF and Password given and if login is sucessfull
+* stores data of account logged
+* Argumens:
+* accounts - linked list that stores all accounts
+* logged_account - will store information of account logged 
+* data_to_find_account - stores data to know which account is to login
+*						 (stores nif and password of account to login)       */
 void login(ListElem* accounts, account_info* logged_account, account_info* data_to_find_account) {
 
 	ListElem account_to_login = { 0 };
@@ -141,6 +187,11 @@ void login(ListElem* accounts, account_info* logged_account, account_info* data_
 	}
 }
 
+/* Recharges the balance of the account currently acessed
+* Arguments:
+* accounts - linked list that stores all accounts
+* logged_account - account that user is logged
+* balance_to_sum - balance to sum to logged account    */
 void add_balance_account(ListElem* accounts, account_info* logged_account, int balance_to_sum) {
 	account_info* data_buf = NULL;
 	ListElem account_to_add_balance = NULL;
@@ -155,4 +206,17 @@ void add_balance_account(ListElem* accounts, account_info* logged_account, int b
 
 		save_accounts(*accounts);
 	}
+}
+
+/* Shows data of one account 
+* Arguments:
+* data - data to show     */
+void show_accounts_data(account_info* data) {
+	printf("Name: %s\n", data->name);
+	printf("Nif: %d\n", data->nif);
+	printf("Balance: %d\n", data->balance);
+	printf("Admin: %d\n", data->type);
+	printf("Password: %s\n", data->password);
+	printf("Residence: %s\n", data->residence);
+	printf("\n");
 }
