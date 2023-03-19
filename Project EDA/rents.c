@@ -1,9 +1,9 @@
 #include "rents.h"
 
-/* Saves one rental in RENTALS_FILE
-* Arguments:
-* rental_transports - linked list that stores rentals
-* new_rental - rental data to save					*/
+/** @brief Saves one rental in RENTALS_FILE
+*
+* @param rental_transports - linked list that stores rentals
+* @param new_rental - rental data to save					*/
 void save_transport_rent(ListElem* rental_transports, transports_rent* new_rental) {
 	FILE* fd;
 
@@ -24,15 +24,15 @@ void save_transport_rent(ListElem* rental_transports, transports_rent* new_renta
 	}
 }
 
-/* Starts to rent an transport
-* Arguments:
-* rental_transports - linked list that stores the rentals
-* transports - linked list that stores the transports
-* logged_account - account curently logged(efectuating the rental)
-* transport_id - transport ID to rent
-* Returns:
-* TRANSPORT_RENTED - start rent sucessfull
-* TRANSPORT_NOT_FOUND - start rent unsucessfull    */
+/** @brief Starts to rent an transport
+*
+* @param[out] rental_transports - linked list that stores the rentals
+* @param transports - linked list that stores the transports
+* @param logged_account - account curently logged(efectuating the rental)
+* @param transport_id - transport ID to rent
+*
+* @retval TRANSPORT_RENTED - start rent sucessfull
+* @retval TRANSPORT_NOT_FOUND - start rent unsucessfull    */
 unsigned int start_rent_transport(ListElem* rental_transports, ListElem transports, account_info logged_account, unsigned int transport_id) {
 	transports_data* aux_buf = malloc(sizeof(transports_data));
 	transports_rent* new_transport_rent = malloc(sizeof(transports_rent));
@@ -58,13 +58,13 @@ unsigned int start_rent_transport(ListElem* rental_transports, ListElem transpor
 	}
 }
 
-/* Verifies if transport ID is equal in two rentals data
-* Arguments:
-* data1 - rental1 data to compare
-* data2 - rental2 data to compare
-* Returns:
-* 1 - Transports IDs of the two rentals are equal
-* 0 - Transports IDs of the two rentals are different */
+/** @brief Verifies if transport ID is equal in two rentals data
+*
+* @param data1 - rental1 data to compare
+* @param data2 - rental2 data to compare
+*
+* @retval 1 - Transports IDs of the two rentals are equal
+* @retval 0 - Transports IDs of the two rentals are different */
 unsigned int compare_rent_transport_id(transports_rent* data1, transports_rent* data2) {
 	if (data1->transport_id == data2->transport_id) {
 		return 1;
@@ -74,13 +74,13 @@ unsigned int compare_rent_transport_id(transports_rent* data1, transports_rent* 
 	}
 }
 
-/* Verifies if client ID is equal in two rentals data
-* Arguments:
-* data1 - rental1 data to compare
-* data2 - rental2 data to compare
-* Returns:
-* 1 - Client NIF of the two rentals are equal
-* 0 - Client NIF of the two rentals are different */
+/** @brief Verifies if client ID is equal in two rentals data
+*
+* @param data1 - rental1 data to compare
+* @param data2 - rental2 data to compare
+*
+* @retval 1 - Client NIF of the two rentals are equal
+* @retval 0 - Client NIF of the two rentals are different */
 unsigned int compare_rent_client_nif(transports_rent* data1, transports_rent* data2) {
 	if (data1->client_nif == data2->client_nif) {
 		return 1;
@@ -90,9 +90,9 @@ unsigned int compare_rent_client_nif(transports_rent* data1, transports_rent* da
 	}
 }
 
-/* Shows data of one rental
-* Arguments:
-* data - rental data to show     */
+/** @brief Shows data of one rental
+*
+* @param data - rental data to show     */
 void show_rents_data(transports_rent* data) {
 	printf("Client NIF: %d\n", data->client_nif);
 	printf("Transport ID: %d\n", data->transport_id);
@@ -102,13 +102,13 @@ void show_rents_data(transports_rent* data) {
 	printf("\n");
 };
 
-/* Main Function that manages the rents
-* Arguments:
-* rental_transports - linked list that stores the rentals
-* transports - linked list that stores the transports
-* accounts - linked list that stores the accounts
-* logged_account - account curently logged(efectuating the rental)
-* transport_id - transport ID to rent				*/
+/** @brief Main Function that manages the rents
+*
+* @param rental_transports[out] - linked list that stores the rentals
+* @param transports - linked list that stores the transports
+* @param accounts[out] - linked list that stores the accounts
+* @param logged_account[out] - account curently logged(efectuating the rental)
+* @param transport_id - transport ID to rent				*/
 void rent_transport(ListElem* rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account, unsigned int transport_id) {
 
 
@@ -150,9 +150,9 @@ void rent_transport(ListElem* rental_transports, ListElem transports, ListElem* 
 
 }
 
-/* Writes all rentals in RENTALS_FILE
-* Arguments:
-* accounts - linked list that stores all accounts */
+/** @brief Writes all rentals in RENTALS_FILE
+*
+* @param accounts - linked list that stores all accounts */
 void save_rents(ListElem rental_transports) {
 	FILE* fd;
 	fd = fopen(RENTALS_FILE, "w");
@@ -177,12 +177,12 @@ void save_rents(ListElem rental_transports) {
 	}
 }
 
-/* Efectuates the payment of an rental
-* Arguments:
-* rental_transports - linked list that stores rentals
-* transports - linked list that stores the transports
-* accounts - linked list that stores the accounts
-* logged_account - account curently logged				*/
+/** @brief Efectuates the payment of an rental
+*
+* @param rental_transports - linked list that stores rentals
+* @param transports - linked list that stores the transports
+* @param[out] accounts - linked list that stores the accounts
+* @param[out] logged_account - account curently logged				*/
 void rent_payment(ListElem rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account) {
 
 	unsigned int cost = 0;
@@ -225,15 +225,15 @@ void rent_payment(ListElem rental_transports, ListElem transports, ListElem* acc
 	save_accounts(*accounts);
 }
 
-/* Finishes a rental
-* Arguments:
-* rental_transports - linked list that stores the rentals
-* transports - linked list that stores the transports
-* accounts - linked list that stores the accounts
-* logged_account - account curently logged(efectuating the rental)
-* Returns:
-* TRANSPORT_RENT_STOPPED - finish rent sucessfull
-* TRANSPORT_RENT_STOP_ERROR - finish rent unsucessfull    */
+/** @brief Finishes a rental
+*
+* @param[out] rental_transports - linked list that stores the rentals
+* @param transports - linked list that stores the transports
+* @param[out] accounts - linked list that stores the accounts
+* @param[out] logged_account - account curently logged(efectuating the rental)
+*
+* @retval TRANSPORT_RENT_STOPPED - finish rent sucessfull
+* @retval TRANSPORT_RENT_STOP_ERROR - finish rent unsucessfull    */
 void stop_rent_transport(ListElem* rental_transports, ListElem transports, ListElem* accounts, account_info* logged_account) {
 
 	transports_rent data_buf = { 0 };
@@ -247,10 +247,10 @@ void stop_rent_transport(ListElem* rental_transports, ListElem transports, ListE
 	save_rents(*rental_transports);
 }
 
-/* Copies rental data from data2 and stores it in data1
-* Arguments:
-* data1 - rental data buffer that will store the information
-* data2 - rental data to copy								*/
+/** @brief Copies rental data from data2 and stores it in data1
+*
+* @param[out] data1 - rental data buffer that will store the information
+* @param data2 - rental data to copy								*/
 void cpy_rent_data(transports_rent* data1, transports_rent* data2) {
 	if (data1 != NULL && data2 != NULL) {
 		data1->client_nif = data2->client_nif;
@@ -261,9 +261,9 @@ void cpy_rent_data(transports_rent* data1, transports_rent* data2) {
 	}
 }
 
-/* Reads accounts in RENTALS_FILE and stores it in rental_transports linked list
-* Arguments:
-* rental_transports - linked list where the rentals will be stored            */
+/** @brief Reads accounts in RENTALS_FILE and stores it in rental_transports linked list
+*
+* @param rental_transports - linked list where the rentals will be stored            */
 void read_rents(ListElem* rental_transports) {
 	FILE* fd;
 	fd = fopen(RENTALS_FILE, "r");
