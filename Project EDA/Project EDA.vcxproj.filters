@@ -33,6 +33,12 @@
     <ClCompile Include="rents.c">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="locations.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="grafo.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="transp.h">
@@ -50,6 +56,12 @@
     <ClInclude Include="rents.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="locations.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="grafo.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="accounts.txt">
@@ -59,6 +71,12 @@
       <Filter>Arquivos de Recurso</Filter>
     </Text>
     <Text Include="rentals.txt">
+      <Filter>Arquivos de Recurso</Filter>
+    </Text>
+    <Text Include="roads.txt">
+      <Filter>Arquivos de Recurso</Filter>
+    </Text>
+    <Text Include="locations.txt">
       <Filter>Arquivos de Recurso</Filter>
     </Text>
   </ItemGroup>

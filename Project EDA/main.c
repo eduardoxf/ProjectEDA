@@ -4,6 +4,7 @@
 #include "transp.h"
 #include "menus.h"
 #include "ll.h"
+#include "locations.h"
 
 int main() {
 
@@ -20,6 +21,10 @@ int main() {
 
 	/* Linked list that will store rentals */
 	ListElem rental_transports = NULL;
+
+	Grafo map = NULL;
+
+	read_map(&map);
 
 	/* Reads Rentals from file */
 	read_rents(&rental_transports);

@@ -128,7 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="accounts.c" />
+    <ClCompile Include="grafo.c" />
     <ClCompile Include="ll.c" />
+    <ClCompile Include="locations.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menus.c" />
     <ClCompile Include="rents.c" />
@@ -136,13 +138,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accounts.h" />
+    <ClInclude Include="grafo.h" />
     <ClInclude Include="ll.h" />
+    <ClInclude Include="locations.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="rents.h" />
     <ClInclude Include="transp.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="accounts.txt" />
+    <Text Include="locations.txt" />
+    <Text Include="roads.txt" />
     <Text Include="rentals.txt" />
     <Text Include="transports.txt" />
   </ItemGroup>
