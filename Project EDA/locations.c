@@ -5,31 +5,21 @@ void read_map_locations(Grafo* map) {
 	fd = fopen(MAP_LOCATIONS_FILE, "r");
 
 	Grafo* aux_graph = malloc(sizeof(Grafo));
-	memset(aux_graph, 0, sizeof(Grafo));
 
-	Grafo aux = { 0 };
-
-	if (fd != NULL) {
-		char str_buf[MAX_BUFFERS_SIZE] = { 0 };
-
-		while (fscanf(fd, "%s\n",
-			str_buf) != EOF) {
-
-			criarVertice(aux_graph, str_buf);
-		}
-
-		while (aux_graph != NULL) {
+	if (aux_graph != NULL) {
+		memset(aux_graph, 0, sizeof(Grafo));
 
 
-			aux = *aux_graph;
-			if (aux->vertice != NULL) {
-				criarVertice(map, aux->vertice);
-				*aux_graph = aux->seguinte;
-			}
-			else {
-				aux_graph = NULL;
+		if (fd != NULL) {
+			char str_buf[MAX_BUFFERS_SIZE] = { 0 };
+
+			while (fscanf(fd, "%s\n",
+				str_buf) != EOF) {
+
+				criarVertice(aux_graph, str_buf);
 			}
 
+			copiarVerticesInvertido(map, *aux_graph);
 		}
 	}
 }

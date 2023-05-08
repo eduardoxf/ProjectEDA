@@ -46,4 +46,5 @@ void listarMeios(Grafo g, char geocodigo[]);
 
 Grafo encontrarVerticePorIndice(Grafo g, unsigned int indice);
 
+void copiarVerticesInvertido(Grafo* destino, Grafo origem);
 

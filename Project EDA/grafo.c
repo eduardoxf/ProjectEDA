@@ -107,3 +107,11 @@ Grafo encontrarVerticePorIndice(Grafo g, unsigned int indice) {
 	}
 	return g;
 }
+
+void copiarVerticesInvertido(Grafo* destino, Grafo origem) {
+	while (origem != NULL)
+	{
+		criarVertice(destino, origem->vertice);
+		origem = origem->seguinte;
+	}
+}
