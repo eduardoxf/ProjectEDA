@@ -199,3 +199,22 @@ void list_transports_by_geocode(ListElem transports, char geocode[]) {
 		transports = transports->next;
 	}
 }
+
+void insert_transports_in_map(Grafo* map, ListElem transports) {
+
+	transports_data* data_buf = NULL;
+	Grafo vertex_buf = NULL;
+
+	while (transports != NULL) {
+
+		data_buf = transports->data;
+
+		inserirMeio(*map, data_buf->geocode, data_buf->id);
+
+		transports = transports->next;
+	}
+}
+
+void list_transports_by_distance(ListElem transport, Grafo map, char* geocode_origin, unsigned int distance) {
+	//Grafo origin = find_vertex_by_geocode(map, geocode_origin);
+}

@@ -35,6 +35,8 @@ int main() {
 	/* Reads Transports from file */
 	read_transports(&transports);
 
+	insert_transports_in_map(&map , transports);
+
 	/* Executes Login */
 	login_menu(&accounts, &logged_account);
 

@@ -37,7 +37,7 @@ int criarVertice(Grafo *g, char novoId[]);
 // Criar uma nova aresta
 // Devolve 1 em caso de sucesso ou 0 caso contrário
 Grafo criarAresta(Grafo g, char vOrigem[], char vDestino[], float peso);
-int existe(Grafo g, char vertice[]);
+int existeVertice(Grafo g, char vertice[]);
 void listarAdjacentes(Grafo g, char vertice[]);
 // Inserir meio de transporte na localização com geocódigo passado por parâmetro
 int inserirMeio(Grafo g, char geocodigo[], int codigoMeio);

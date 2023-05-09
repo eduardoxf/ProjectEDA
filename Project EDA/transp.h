@@ -10,6 +10,7 @@
 #include <ctype.h>
 #include "ll.h"
 #include "accounts.h"
+#include "locations.h"
 
 /* Types of Transports */
 #define SCOOTER 1
@@ -19,7 +20,7 @@
 #define TRANSPORTS_FILE "transports.txt"
 
 /* Sizes of each string in transports data structure */
-#define MAX_GEOCODE_SIZE 30
+#define MAX_GEOCODE_SIZE 70
 
 /** @struct transports_data_s
 * @brief Data structure of each transport in the linked list
@@ -122,3 +123,5 @@ void list_transports_by_autonomy(ListElem transports);
 * @param transports - linked list that stores all transports
 * @param geocode - geocode of transports to list			*/
 void list_transports_by_geocode(ListElem transports, char geocode[]);
+
+void insert_transports_in_map(Grafo* map, ListElem transports);
