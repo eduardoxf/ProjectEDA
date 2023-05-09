@@ -1,5 +1,9 @@
 #include "locations.h"
 
+/** @brief Reads the MAP locations file(MAP_LOCATIONS_FILE) and stores the
+* locations in the map data structure
+*
+* @param[out] map - map data structure where the data will be stored */
 void read_map_locations(Grafo* map) {
 	FILE* fd;
 	fd = fopen(MAP_LOCATIONS_FILE, "r");
@@ -24,6 +28,10 @@ void read_map_locations(Grafo* map) {
 	}
 }
 
+/** @brief Reads the MAP roads file(MAP_ROADS_FILE) and stores the
+* roads in the map data structure
+*
+* @param[out] map - map data structure where the data will be stored */
 void read_map_roads(Grafo* map) {
 
 	FILE* fd;
@@ -50,9 +58,15 @@ void read_map_roads(Grafo* map) {
 	}
 }
 
+/** @brief Reads MAP relatable files(MAP_LOCATIONS_FILE, MAP_ROADS_FILE) and stores the
+* data in the map data structure
+*
+* @param[out] map - map data structure where the data will be stored */
 void read_map(Grafo* map) {
 
 	read_map_locations(map);
 
 	read_map_roads(map);
+
 }
+

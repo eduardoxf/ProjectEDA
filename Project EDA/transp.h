@@ -124,4 +124,10 @@ void list_transports_by_autonomy(ListElem transports);
 * @param geocode - geocode of transports to list			*/
 void list_transports_by_geocode(ListElem transports, char geocode[]);
 
+/** @brief Inserts all Transports in the Map data structure
+*
+* @param map - map where the transports will be inserted
+* @param transports - all transports to be inserted			*/
 void insert_transports_in_map(Grafo* map, ListElem transports);
+
+void list_transports_by_distance(ListElem transport, Grafo map, char* geocode_origin, unsigned int distance):

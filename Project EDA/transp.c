@@ -200,6 +200,10 @@ void list_transports_by_geocode(ListElem transports, char geocode[]) {
 	}
 }
 
+/** @brief Inserts all Transports in the Map data structure
+*
+* @param[out] map - map where the transports will be inserted
+* @param transports - all transports to be inserted			*/
 void insert_transports_in_map(Grafo* map, ListElem transports) {
 
 	transports_data* data_buf = NULL;
@@ -216,5 +220,5 @@ void insert_transports_in_map(Grafo* map, ListElem transports) {
 }
 
 void list_transports_by_distance(ListElem transport, Grafo map, char* geocode_origin, unsigned int distance) {
-	//Grafo origin = find_vertex_by_geocode(map, geocode_origin);
+
 }
