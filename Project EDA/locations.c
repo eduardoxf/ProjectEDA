@@ -70,3 +70,8 @@ void read_map(Grafo* map) {
 
 }
 
+
+int find_shortest_path(Grafo map, char* origin_geocode, char* destiny_geocode) {
+
+}
+

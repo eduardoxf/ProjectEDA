@@ -24,3 +24,5 @@ void read_map_roads(Grafo* map);
 *
 * @param[out] map - map data structure where the data will be stored */
 void read_map(Grafo* map);
+
+int find_shortest_path(Grafo map, char* origin_geocode, char* destiny_geocode);
