@@ -10,6 +10,7 @@ int criarVertice(Grafo* g, char novoId[])
 	{
 		strcpy(novo->vertice, novoId);
 		novo->meios = NULL;
+		novo->adjacentes = NULL;
 		novo->seguinte = *g;
 		*g = novo;
 		return(1);
@@ -103,9 +104,24 @@ void listarMeios(Grafo g, char geocodigo[])
 
 Grafo encontrarVerticePorIndice(Grafo g, unsigned int indice) {
 	for (unsigned int i = 0; i < indice; i++) {
+		if (g == NULL) {
+			break;
+		}
 		g = g->seguinte;
 	}
 	return g;
+}
+
+int encontrarIndiceVertice(Grafo g, char* geocode) {
+	unsigned int vertex_index = 0;
+	while (g!=NULL) {
+		if (strcmp(g->vertice, geocode)==0) {
+			return vertex_index;
+		}
+		vertex_index++;
+		g = g->seguinte;
+	}
+	return -1;
 }
 
 void copiarVerticesInvertido(Grafo* destino, Grafo origem) {
@@ -114,4 +130,16 @@ void copiarVerticesInvertido(Grafo* destino, Grafo origem) {
 		criarVertice(destino, origem->vertice);
 		origem = origem->seguinte;
 	}
+}
+
+int encontrarIndiceAdjacente(Adjacente adj, char* geocode) {
+	unsigned int adj_index = 0;
+	while (adj != NULL) {
+		if (strcmp(adj->vertice, geocode) == 0) {
+			return adj_index;
+		}
+		adj_index++;
+		adj = adj->seguinte;
+	}
+	return -1;
 }

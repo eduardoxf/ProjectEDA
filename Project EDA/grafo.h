@@ -48,3 +48,7 @@ Grafo encontrarVerticePorIndice(Grafo g, unsigned int indice);
 
 void copiarVerticesInvertido(Grafo* destino, Grafo origem);
 
+int encontrarIndiceVertice(Grafo g, char* geocode);
+
+int encontrarIndiceAdjacente(Adjacente adj, char* geocode);
+
