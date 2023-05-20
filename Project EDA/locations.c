@@ -79,8 +79,7 @@ int get_number_locations(Grafo map) {
 	return n_locations;
 }
 
-int min_distance_adjacents(float min_distances[], char locations_processed[], int number_locations)
-{
+int min_distance_adjacents(float min_distances[], char locations_processed[], int number_locations){
 	float min = INT_MAX;
 	int min_index = -1;
 
@@ -92,42 +91,46 @@ int min_distance_adjacents(float min_distances[], char locations_processed[], in
 }
 
 
+float* find_shortest_path(Grafo map, char* origin_geocode, int number_locations) {
 
-
-
-void find_shortest_path(Grafo map, char* origin_geocode, int number_locations, float** output_distances) {
-
-	/* Regista distancias minimas encontradas para cada vertice */
+	
+	/* min_distances is an array with size equal to the number of locations */
+	/* Stores minimum distances found from the origin to each location */
 	float* min_distances;
 	min_distances = (float*)malloc(number_locations * sizeof(float));
 
-	/* Regista se distancia minima foi encontrada para cada vertice */
+	/* locations_processed is an array with size equal to the number of locations */
+	/* Stores if minimum distance was already found for each location */
 	char* locations_processed;
 	locations_processed = (char*)malloc(number_locations);
 
-	/* Inicializa a lista de distancias a infinito */
-	/* Inicializa a lista de distancias minimas processadas a falso */
+	/* Inicializes array of minimum distances as infinite */
+	/* Inicializes array of locations processed as infinite */
 	for (int i = 0; i < number_locations; i++) {
 		min_distances[i] = MAX_FLOAT;
 		locations_processed[i] = FALSE;
 	}
 
-	/* Distancia da origem para ela mesma definida a 0 */
+	/* Defines minimum distance of origin to herself as 0*/
 	min_distances[encontrarIndiceVertice(map, origin_geocode)] = 0;
 
 
+	/* Runs through all locations */
 	for (int i = 0; i < (number_locations - 1); i++) {
 
+		/* Gets the index of the adjacent closer */
 		int min_distance_vertex_index = min_distance_adjacents(min_distances, locations_processed, number_locations);
 
+		/* Sets the minimum distance of the closer adjacent as found */
 		locations_processed[min_distance_vertex_index] = TRUE;
 
+		/* Gets the closer adjacent */
 		Grafo vertex_found = encontrarVerticePorIndice(map, min_distance_vertex_index);
 
+		/* Gets list of adjacents to the closer adjacent*/
 		Adjacente vertex_found_adjacents = vertex_found->adjacentes;
 
-		//cpy_adjacent_data(&vertex_found_adjacents, vertex_found->adjacentes);
-
+		/* Runs through all the adjacents to the locations found */
 		while (vertex_found_adjacents != NULL) {
 			
 			int vertex_found_adjacent_index = encontrarIndiceVertice(map, vertex_found_adjacents->vertice);
@@ -143,7 +146,8 @@ void find_shortest_path(Grafo map, char* origin_geocode, int number_locations, f
 		}
 	}
 
-	*output_distances = min_distances;
+	/* Returns list of minimum distances */
+	return min_distances;
 
 }
 

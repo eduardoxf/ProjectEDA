@@ -37,17 +37,16 @@ int main() {
 
 	insert_transports_in_map(&map , transports);
 
-	char str23[50];
-	strcpy_s(str23, 50, "///reluzindo.torção.passeio");
-
-	float* distances;
-	find_shortest_path(map, str23, 6, &distances);
+	float* distances = find_shortest_path(map, "///sordidamente.tilintar.pisando", get_number_locations(map));
 	printf(" Distancia 0: %f\n", distances[0]);
 	printf(" Distancia 1: %f\n", distances[1]);
 	printf(" Distancia 2: %f\n", distances[2]);
 	printf(" Distancia 3: %f\n", distances[3]);
 	printf(" Distancia 4: %f\n", distances[4]);
 	printf(" Distancia 5: %f\n", distances[5]);
+	
+
+	list_transports_by_distance(transports,map,"///sordidamente.tilintar.pisando", 70);
 
 	/* Executes Login */
 	login_menu(&accounts, &logged_account);

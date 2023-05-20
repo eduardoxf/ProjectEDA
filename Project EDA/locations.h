@@ -32,4 +32,8 @@ void read_map_roads(Grafo* map);
 * @param[out] map - map data structure where the data will be stored */
 void read_map(Grafo* map);
 
-void find_shortest_path(Grafo map, char* origin_geocode, int number_locations, float* output_distances);
+int get_number_locations(Grafo map);
+
+int min_distance_adjacents(float min_distances[], char locations_processed[], int number_locations);
+
+float* find_shortest_path(Grafo map, char* origin_geocode, int number_locations);

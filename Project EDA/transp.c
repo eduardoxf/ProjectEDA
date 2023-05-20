@@ -39,7 +39,7 @@ void read_transports(ListElem* transports) {
 	fd = fopen(TRANSPORTS_FILE, "r");
 	if (fd != NULL) {
 		transports_data aux_buf = { 0 };
-		while (fscanf(fd, "%d:%d:%d:%d:%[^:]:\n", 
+		while (fscanf(fd, "%d:%d:%d:%d:%[^:]:\n",
 			&aux_buf.id,
 			&aux_buf.type,
 			&aux_buf.battery,
@@ -147,7 +147,7 @@ void edit_transport(ListElem* transports, transports_data* data_to_find_transpor
 * @retval -1 - Data1 > Data2 autonomy
 * @retval 0 - Data1 = Data2 autonomy													*/
 int compare_transports_autonomy(transports_data* data1, transports_data* data2) {
-	if (data1->autonomy>data2->autonomy) {
+	if (data1->autonomy > data2->autonomy) {
 		return -1;
 	}
 	else if (data1->autonomy < data2->autonomy) {
@@ -193,7 +193,7 @@ void list_transports_by_geocode(ListElem transports, char geocode[]) {
 	transports_data* data_buf = NULL;
 	while (transports != NULL) {
 		data_buf = transports->data;
-		if (strcmp(data_buf->geocode, geocode)==0) {
+		if (strcmp(data_buf->geocode, geocode) == 0) {
 			show_transports_data(data_buf);
 		}
 		transports = transports->next;
@@ -219,6 +219,16 @@ void insert_transports_in_map(Grafo* map, ListElem transports) {
 	}
 }
 
-void list_transports_by_distance(ListElem transport, Grafo map, char* geocode_origin, unsigned int distance) {
+void list_transports_by_distance(ListElem transports, Grafo map, char* origin_geocode, unsigned int distance) {
 
+	int number_locations = get_number_locations(map);
+	float* distances = find_shortest_path(map, origin_geocode, number_locations);
+	Grafo current_vertex;
+
+	for (int i = 0; i < number_locations; i++) {
+		if (distances[i] <= distance) {
+			current_vertex = encontrarVerticePorIndice(map, i);
+			list_transports_by_geocode(transports, current_vertex->vertice);
+		}
+	}
 }
