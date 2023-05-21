@@ -22,8 +22,10 @@ int main() {
 	/* Linked list that will store rentals */
 	ListElem rental_transports = NULL;
 
+	/* Graph that stores all the locations and distances beetween them */
 	Grafo map = NULL;
 
+	/* Reads Map from files */
 	read_map(&map);
 
 	/* Reads Rentals from file */
@@ -35,18 +37,8 @@ int main() {
 	/* Reads Transports from file */
 	read_transports(&transports);
 
+	/* Inserts all transports in the correct map location */
 	insert_transports_in_map(&map , transports);
-
-	float* distances = find_shortest_path(map, "///sordidamente.tilintar.pisando", get_number_locations(map));
-	printf(" Distancia 0: %f\n", distances[0]);
-	printf(" Distancia 1: %f\n", distances[1]);
-	printf(" Distancia 2: %f\n", distances[2]);
-	printf(" Distancia 3: %f\n", distances[3]);
-	printf(" Distancia 4: %f\n", distances[4]);
-	printf(" Distancia 5: %f\n", distances[5]);
-	
-
-	list_transports_by_distance(transports,map,"///sordidamente.tilintar.pisando", 70);
 
 	/* Executes Login */
 	login_menu(&accounts, &logged_account);

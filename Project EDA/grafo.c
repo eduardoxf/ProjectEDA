@@ -102,6 +102,12 @@ void listarMeios(Grafo g, char geocodigo[])
 	else printf("geocodigo inexistente\n");
 }
 
+/** @brief Finds a vertex in the graph based on its index.
+* 
+* @param g - The graph in which to search for the vertex.
+* @param indice - The index of the vertex to find.
+* 
+* @return The vertex found at the specified index, or NULL if not found. */
 Grafo encontrarVerticePorIndice(Grafo g, unsigned int indice) {
 	for (unsigned int i = 0; i < indice; i++) {
 		if (g == NULL) {
@@ -112,6 +118,12 @@ Grafo encontrarVerticePorIndice(Grafo g, unsigned int indice) {
 	return g;
 }
 
+/** @brief Finds the index of a vertex in the graph based on its geocode.
+* 
+* @param g - The graph in which to search for the vertex.
+* @param geocode - The geocode of the vertex to find.
+*
+* @return The index of the vertex found, or -1 if not found. */
 int encontrarIndiceVertice(Grafo g, char* geocode) {
 	unsigned int vertex_index = 0;
 	while (g!=NULL) {
@@ -124,6 +136,10 @@ int encontrarIndiceVertice(Grafo g, char* geocode) {
 	return -1;
 }
 
+/** @brief Copies vertices in reverse order from the source graph to the destination graph.
+* 
+* @param destino - The destination graph where the vertices will be copied to.
+* @param origem - The source graph from which the vertices will be copied.           */
 void copiarVerticesInvertido(Grafo* destino, Grafo origem) {
 	while (origem != NULL)
 	{
@@ -132,14 +148,3 @@ void copiarVerticesInvertido(Grafo* destino, Grafo origem) {
 	}
 }
 
-int encontrarIndiceAdjacente(Adjacente adj, char* geocode) {
-	unsigned int adj_index = 0;
-	while (adj != NULL) {
-		if (strcmp(adj->vertice, geocode) == 0) {
-			return adj_index;
-		}
-		adj_index++;
-		adj = adj->seguinte;
-	}
-	return -1;
-}

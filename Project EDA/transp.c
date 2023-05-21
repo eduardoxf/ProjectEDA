@@ -219,6 +219,12 @@ void insert_transports_in_map(Grafo* map, ListElem transports) {
 	}
 }
 
+/** @brief This function lists transports within a given distance from a specified origin location
+*
+* @param map - map of the locations and connections between them
+* @param transports - linked list that stores all transports 			 
+* @param origin_geocode - geocode of location of origin 
+* @param distance - maximum distance from origin to transport */
 void list_transports_by_distance(ListElem transports, Grafo map, char* origin_geocode, unsigned int distance) {
 
 	int number_locations = get_number_locations(map);

@@ -1,5 +1,13 @@
 #pragma once
 
+/** @struct sListElem
+* @brief This data structure holds a generic linked list
+*
+* @var sListElem::data
+* Member 'data' contains the memmory address of the data in the element
+*
+* @var sListElem::next
+* Member 'next' contains the memmory address of the next element in the linked list */
 typedef struct sListElem {
 	void *data;
 	struct sListElem *next;
@@ -46,6 +54,8 @@ ListElem deleteList(ListElem head);
 // Element on the list on specific position
 ListElem obtainElementPosition(ListElem head, int pos);
 
+// Edit data of a specific item
 void editItemData(ListElem item_to_edit, void* new_data);
 
+// Gets Item based on a specific data
 ListElem findItemIterative(ListElem head, void* data, int (*compare)(void* data1, void* data2));
