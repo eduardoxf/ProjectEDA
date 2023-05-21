@@ -38,6 +38,9 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 			printf("\t\033[0;34mInsert Password:\n");
 			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
 
+			printf("\t\033[0;34mInsert Geocode:\n");
+			gets_s(data_buf->geocode, MAX_GEOCODE_SIZE);
+
 			create_account(accounts_llist, data_buf);
 			break;
 
@@ -67,7 +70,7 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account) {
 * @param[out] transports_llist - linked lsit that stores all transports
 * @param[out] accounts - linked list that stores all accounts
 * @param[out] logged_account - stores data of logged account */
-void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, ListElem* accounts, account_info* logged_account) {
+void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, ListElem* accounts, account_info* logged_account, Grafo map) {
 	unsigned char menu_option = NONE;
 	int balance_buf = 0;
 
@@ -82,7 +85,7 @@ void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, L
 		menu_option = toupper(menu_option);
 		switch (menu_option) {
 		case LIST_TRANSPORTS:
-			list_transport_menu(transports_llist, logged_account);
+			list_transport_menu(transports_llist, logged_account, map);
 			break;
 		case RENT_TRANSPORT:
 			rent_transport_menu(rental_transports, *transports_llist, accounts, logged_account);
@@ -105,7 +108,7 @@ void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, L
 * @param[out] transports_llist - linked lsit that stores all transports
 * @param[out] accounts_llist - linked list that stores all accounts
 * @param[out] logged_account - stores data of logged account */
-void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, account_info* logged_account) {
+void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, account_info* logged_account, Grafo map) {
 	unsigned char menu_option = NONE;
 
 	while (menu_option != EXIT_MENU) {
@@ -122,7 +125,7 @@ void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, accou
 			account_menu(accounts_llist, logged_account);
 			break;
 		case MANAGE_TRANSPORTS:
-			transport_menu(transports_llist, accounts_llist, logged_account);
+			transport_menu(transports_llist, accounts_llist, logged_account, map);
 			break;
 		}
 	}
@@ -173,6 +176,9 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			printf("\t\033[0;34mInsert Password:\n");
 			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
 
+			printf("\t\033[0;34mInsert Geocode:\n");
+			gets_s(data_buf->geocode, MAX_GEOCODE_SIZE);
+
 			create_account(accounts_llist, data_buf);
 			break;
 		case DELETE_ACCOUNT:
@@ -218,6 +224,9 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 			printf("\t\033[0;34mInsert Password:\n");
 			gets_s(data_buf->password, MAX_PASSWORD_SIZE);
 
+			printf("\t\033[0;34mInsert Geocode:\n");
+			gets_s(data_buf->geocode, MAX_GEOCODE_SIZE);
+
 			edit_account(accounts_llist, &account_to_edit_data, data_buf);
 			break;
 		}
@@ -231,7 +240,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 * @param[out] transports - linked list that stores all transports
 * @param[out] accounts - linked list that stores all accounts
 * @param[out] logged_account - stores data of logged account */
-void transport_menu(ListElem* transports, ListElem* accounts, account_info* logged_account) {
+void transport_menu(ListElem* transports, ListElem* accounts, account_info* logged_account, Grafo map) {
 	unsigned char transport_menu_option = NONE;
 	char str_buf[MAX_BUFFERS_SIZE] = { 0 };
 
@@ -312,7 +321,7 @@ void transport_menu(ListElem* transports, ListElem* accounts, account_info* logg
 
 			break;
 		case LIST_TRANSPORTS:
-			list_transport_menu(transports, logged_account);
+			list_transport_menu(transports, logged_account, map);
 			break;
 		}
 	}
@@ -320,21 +329,23 @@ void transport_menu(ListElem* transports, ListElem* accounts, account_info* logg
 
 /** @brief Menu for listings of transports
 * Freatures:
-* List by Autonomy and Geocode
+* List by Autonomy, Geocode and Distance
 *
 * @param[out] transports - linked list that stores all transports
 * @param[out] logged_account - stores data of logged account */
-void list_transport_menu(ListElem* transports, account_info* logged_account) {
+void list_transport_menu(ListElem* transports, account_info* logged_account, Grafo map) {
 	unsigned char list_transport_menu_option = NONE;
-	char geocode_buf[MAX_GEOCODE_SIZE] = { 0 };
+	char str_buf[MAX_GEOCODE_SIZE] = { 0 };
+	unsigned int distance_buf = 0;
+
 	while (list_transport_menu_option != EXIT_MENU)
 	{
 		system("cls");
 		printf("\t\033[0;34m-------------[ MENU ]-------------\t \033[0;36mLogged Account\n");
 		printf("\t\033[0;34m  %c  - List Transports by autonomy\t   \033[0;36mName: %s\n", LIST_TRANSPORTS_BY_AUTONOMY, logged_account->name);
 		printf("\t\033[0;34m  %c  - List Transports by location\t   \033[0;36mNIF: %d\n", LIST_TRANSPORTS_BY_LOCATION, logged_account->nif);
-		printf("\t\033[0;34m  ESC - Back\t\t\t\t   \033[0;36mBalance: %d\n", logged_account->balance);
-		printf("\t\t\t\t\t\t   \033[0;36mResidence: %s\n", logged_account->residence);
+		printf("\t\033[0;34m  %c  - List Transports by Distance\t   \033[0;36mBalance: %d\n", LIST_TRANSPORTS_BY_DISTANCE, logged_account->balance);
+		printf("\t\033[0;34m  ESC - Back\t\t\t\t   \033[0;36mResidence: %s\n", logged_account->residence);
 		list_transport_menu_option = _getch();
 		list_transport_menu_option = toupper(list_transport_menu_option);
 		switch (list_transport_menu_option) {
@@ -346,9 +357,20 @@ void list_transport_menu(ListElem* transports, account_info* logged_account) {
 		case LIST_TRANSPORTS_BY_LOCATION:
 			system("cls");
 			printf("\t\033[0;34m Insert geocode:\n");
-			gets_s(geocode_buf, MAX_GEOCODE_SIZE);
+			gets_s(str_buf, MAX_GEOCODE_SIZE);
 			system("cls");
-			list_transports_by_geocode(*transports, geocode_buf);
+			list_transports_by_geocode(*transports, str_buf);
+			printf("Press any key to continue...\n");
+			_getch();
+			break;
+		case LIST_TRANSPORTS_BY_DISTANCE:
+			system("cls");
+			printf("\t\033[0;34m Insert Distance:\n");
+			gets_s(str_buf, MAX_GEOCODE_SIZE);
+			distance_buf = atoi(str_buf);
+
+			system("cls");
+			list_transports_by_distance(*transports, map,logged_account->geocode, distance_buf);
 			printf("Press any key to continue...\n");
 			_getch();
 			break;

@@ -13,6 +13,7 @@ void cpy_account_data(account_info* data1, account_info* data2) {
 		strcpy_s(data1->name, MAX_NAME_SIZE, data2->name);
 		strcpy_s(data1->password, MAX_PASSWORD_SIZE, data2->password);
 		strcpy_s(data1->residence, MAX_RESIDENCE_SIZE, data2->residence);
+		strcpy_s(data1->geocode, MAX_GEOCODE_SIZE, data2->geocode);
 		
 	}
 }
@@ -61,12 +62,13 @@ void read_accounts(ListElem* accounts_llist) {
 
 	if (fd != NULL) {
 		account_info aux_buf = { 0 };
-		while (fscanf(fd, "%[^:]:%d:%d:%d:%[^:]:%[^:]:\n", aux_buf.name, 
+		while (fscanf(fd, "%[^:]:%d:%d:%d:%[^:]:%[^:]:%[^:]:\n", aux_buf.name, 
 																	&aux_buf.type, 
 																	&aux_buf.nif,
 																	&aux_buf.balance, 
 																	aux_buf.residence, 
-																	aux_buf.password) != EOF) {
+																	aux_buf.password,
+																	aux_buf.geocode) != EOF) {
 			account_info* aux = malloc(sizeof(account_info));
 
 			cpy_account_data(aux,&aux_buf);
@@ -87,13 +89,14 @@ void create_account(ListElem* accounts, account_info* new_account_data) {
 	fd = fopen(ACCOUNTS_FILE, "a");
 
 	if (fd != NULL) {
-		fprintf(fd, "%s:%d:%d:%d:%s:%s:\n",
+		fprintf(fd, "%s:%d:%d:%d:%s:%s:%s:\n",
 			new_account_data->name,
 			new_account_data->type,
 			new_account_data->nif,
 			new_account_data->balance,
 			new_account_data->residence,
-			new_account_data->password);
+			new_account_data->password,
+			new_account_data->geocode);
 		
 		*accounts = addItemHead(*accounts, new_account_data);
 		fclose(fd);
@@ -111,13 +114,14 @@ void save_accounts(ListElem accounts) {
 	if (fd != NULL) {
 		while (accounts != NULL) {
 			account_data = accounts->data;
-			fprintf(fd, "%s:%d:%d:%d:%s:%s:\n",
+			fprintf(fd, "%s:%d:%d:%d:%s:%s:%s:\n",
 				account_data->name,
 				account_data->type, 
 				account_data->nif,
 				account_data->balance,
 				account_data->residence,
-				account_data->password);
+				account_data->password,
+				account_data->geocode);
 
 			accounts = accounts->next;
 		}
@@ -148,26 +152,32 @@ void edit_account(ListElem* accounts, account_info* data_to_find_account, accoun
 	account_info* current_account_data;
 	
 	account_to_edit = findItemIterative(*accounts, data_to_find_account, &compare_account_nif);
-	current_account_data = account_to_edit->data;
 
-	if (new_data->name[0] == 0) {
-		strcpy(new_data->name, current_account_data->name);
-	}
-	if (new_data->type == 0) {
-		new_data->type = current_account_data->type;
-	}
-	if (new_data->password[0] == 0) {
-		strcpy(new_data->password, current_account_data->password);
-	}
-	if (new_data->residence[0] == 0) {
-		strcpy(new_data->residence, current_account_data->residence);
-	}
-	if (new_data->nif == 0) {
-		new_data->nif = current_account_data->nif;
-	}
+	if (account_to_edit != NULL) {
+		current_account_data = account_to_edit->data;
 
-	editItemData(account_to_edit,new_data);
-	save_accounts(*accounts);
+		if (new_data->name[0] == 0) {
+			strcpy(new_data->name, current_account_data->name);
+		}
+		if (new_data->type == 0) {
+			new_data->type = current_account_data->type;
+		}
+		if (new_data->password[0] == 0) {
+			strcpy(new_data->password, current_account_data->password);
+		}
+		if (new_data->residence[0] == 0) {
+			strcpy(new_data->residence, current_account_data->residence);
+		}
+		if (new_data->nif == 0) {
+			new_data->nif = current_account_data->nif;
+		}
+		if (new_data->geocode[0] == 0) {
+			strcpy(new_data->geocode, current_account_data->geocode);
+		}
+
+		editItemData(account_to_edit, new_data);
+		save_accounts(*accounts);
+	}
 }
 
 /** @brief Executes the login based on NIF and Password given and if login is sucessfull
@@ -218,5 +228,6 @@ void show_accounts_data(account_info* data) {
 	printf("Admin: %d\n", data->type);
 	printf("Password: %s\n", data->password);
 	printf("Residence: %s\n", data->residence);
+	printf("Geocode: %s\n", data->geocode);
 	printf("\n");
 }

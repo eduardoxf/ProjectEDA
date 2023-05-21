@@ -1,3 +1,5 @@
+#pragma once
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -5,7 +7,7 @@
 #include <stdlib.h>
 
 /* Max size of a geocode */
-#define TAM 50
+#define TAM 100
 
 /** @struct registo3
 * @brief This data structure holds the list of transports presents in a location

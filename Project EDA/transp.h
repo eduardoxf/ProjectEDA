@@ -11,6 +11,7 @@
 #include "ll.h"
 #include "accounts.h"
 #include "locations.h"
+#include "grafo.h"
 
 /* Types of Transports */
 #define SCOOTER 1
@@ -18,9 +19,6 @@
 
 /* Path of file that stores transports */
 #define TRANSPORTS_FILE "transports.txt"
-
-/* Sizes of each string in transports data structure */
-#define MAX_GEOCODE_SIZE 70
 
 /** @struct transports_data_s
 * @brief Data structure of each transport in the linked list

@@ -40,6 +40,7 @@
 /* List Transports menu options */
 #define LIST_TRANSPORTS_BY_AUTONOMY 'A'
 #define LIST_TRANSPORTS_BY_LOCATION 'L'
+#define LIST_TRANSPORTS_BY_DISTANCE 'D'
 
 /** @brief Login Menu
 * Freatures:
@@ -57,7 +58,7 @@ void login_menu(ListElem* accounts_llist, account_info* logged_account);
 * @param[out] transports_llist - linked lsit that stores all transports
 * @param[out] accounts - linked list that stores all accounts
 * @param[out] logged_account - stores data of logged account */
-void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, ListElem* accounts, account_info* logged_account);
+void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, ListElem* accounts, account_info* logged_account, Grafo map);
 
 /** @brief Menu specific only for admins
 * Freatures:
@@ -66,7 +67,7 @@ void client_main_menu(ListElem* rental_transports, ListElem* transports_llist, L
 * @param[out] transports_llist - linked lsit that stores all transports
 * @param[out] accounts_llist - linked list that stores all accounts
 * @param[out] logged_account - stores data of logged account */
-void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, account_info* logged_account);
+void admin_main_menu(ListElem* accounts_llist, ListElem* transports_llist, account_info* logged_account, Grafo map);
 
 /** @brief Menu for accounts management(ADMINs Only)
 * Freatures:
@@ -83,15 +84,15 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account);
 * @param[out] transports - linked list that stores all transports
 * @param[out] accounts - linked list that stores all accounts
 * @param[out] logged_account - stores data of logged account */
-void transport_menu(ListElem* transports, ListElem* accounts, account_info* logged_account);
+void transport_menu(ListElem* transports, ListElem* accounts, account_info* logged_account, Grafo map);
 
 /** @brief Menu for listings of transports
 * Freatures:
-* List by Autonomy and Geocode
+* List by Autonomy, Geocode and Distance
 * 
 * @param[out] transports - linked list that stores all transports
 * @param[out] logged_account - stores data of logged account */
-void list_transport_menu(ListElem* transports, account_info* logged_account);
+void list_transport_menu(ListElem* transports, account_info* logged_account, Grafo map);
 
 /** @brief Menu for rentings of Transports
 * 

@@ -6,14 +6,16 @@
 #include <stdio.h>
 #include <string.h>
 #include "ll.h"
-
-/* Should be at least the same size of the biggest data in the accounts data structure */
-#define MAX_BUFFERS_SIZE 75
+#include "grafo.h"
 
 /* Sizes of each string in accounts data structures */
 #define MAX_NAME_SIZE 30
 #define MAX_RESIDENCE_SIZE 75
 #define MAX_PASSWORD_SIZE 30
+#define MAX_GEOCODE_SIZE TAM
+
+/* Should be at least the same size of the biggest data in the accounts data structure */
+#define MAX_BUFFERS_SIZE MAX_GEOCODE_SIZE
 
 /* Type of Account */
 #define ADMIN 1
@@ -41,7 +43,10 @@
 * Member 'residence' contains the user's residence of the account
 * 
 * @var account_info_s::password
-* Member 'password' contains the password of the account   */
+* Member 'password' contains the password of the account
+* 
+* * @var account_info_s::geocode
+* Member 'geocode' contains the geocode where the user is located   */
 typedef struct account_info_s{
 
 	char name[MAX_NAME_SIZE];
@@ -55,6 +60,8 @@ typedef struct account_info_s{
 	char residence[MAX_RESIDENCE_SIZE];
 
 	char password[MAX_PASSWORD_SIZE];
+
+	char geocode[MAX_GEOCODE_SIZE];
 }account_info;
 
 /** @brief Copies data from data2 and stores it in data1
