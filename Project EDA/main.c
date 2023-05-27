@@ -6,21 +6,6 @@
 #include "ll.h"
 #include "locations.h"
 
-
-void list_all_accounts(ListElem accounts) {
-	while (accounts != NULL) {
-		show_accounts_data(accounts->data);
-		accounts = accounts->next;
-	}
-}
-
-void list_all_transports(ListElem transports) {
-	while (transports != NULL) {
-		show_transports_data(transports->data);
-		transports = transports->next;
-	}
-}
-
 int main() {
 
 	setlocale(LC_ALL, "Portuguese");
@@ -49,12 +34,8 @@ int main() {
 	/* Reads Accounts from file */
 	read_accounts(&accounts);
 
-	//list_all_accounts(accounts);
-
 	/* Reads Transports from file */
 	read_transports(&transports);
-
-	//list_all_transports(transports);
 
 	/* Inserts all transports in the correct map location */
 	insert_transports_in_map(&map , transports);

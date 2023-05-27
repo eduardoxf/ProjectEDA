@@ -36,6 +36,7 @@
 #define CREATE_TRANSPORT 'C'
 #define DELETE_TRANSPORT 'D'
 #define EDIT_TRANSPORT 'E'
+#define COLLECT_TRANSPORTS 'G'
 
 /* List Transports menu options */
 #define LIST_TRANSPORTS_BY_AUTONOMY 'A'
@@ -79,8 +80,8 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account);
 
 /** @brief Menu for transport managements(ADMINs Only)
 * Freatures:
-* Create, Delete or Edit an Transport
-* 
+* Create, Delete, Edit or Collect Transport(s)
+*
 * @param[out] transports - linked list that stores all transports
 * @param[out] accounts - linked list that stores all accounts
 * @param[out] logged_account - stores data of logged account */

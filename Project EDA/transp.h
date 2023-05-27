@@ -17,6 +17,10 @@
 #define SCOOTER 1
 #define BYCICLE 2
 
+#define SCOOTER_WHEIGHT 3
+#define BYCICLE_WHEIGHT 2
+
+
 /* Path of file that stores transports */
 #define TRANSPORTS_FILE "transports.txt"
 

@@ -228,11 +228,11 @@ void insert_transports_in_map(Grafo* map, ListElem transports) {
 void list_transports_by_distance(ListElem transports, Grafo map, char* origin_geocode, unsigned int distance) {
 
 	int number_locations = get_number_locations(map);
-	float* distances = find_shortest_path(map, origin_geocode, number_locations);
+	distance_path* distances = find_shortest_path(map, origin_geocode, number_locations);
 	Grafo current_vertex;
 
 	for (int i = 0; i < number_locations; i++) {
-		if (distances[i] <= distance) {
+		if (distances[i].distance <= distance) {
 			current_vertex = encontrarVerticePorIndice(map, i);
 			list_transports_by_geocode(transports, current_vertex->vertice);
 		}

@@ -235,7 +235,7 @@ void account_menu(ListElem* accounts_llist, account_info* logged_account) {
 
 /** @brief Menu for transport managements(ADMINs Only)
 * Freatures:
-* Create, Delete or Edit an Transport
+* Create, Delete, Edit or Collect Transport(s)
 *
 * @param[out] transports - linked list that stores all transports
 * @param[out] accounts - linked list that stores all accounts
@@ -252,7 +252,8 @@ void transport_menu(ListElem* transports, ListElem* accounts, account_info* logg
 		printf("\t\033[0;34m  %c  - Remove Transport\t\t\t   \033[0;36mNIF: %d\n", DELETE_TRANSPORT, logged_account->nif);
 		printf("\t\033[0;34m  %c  - Edit Transport\t\t\t   \033[0;36mBalance: %d\n", EDIT_TRANSPORT, logged_account->balance);
 		printf("\t\033[0;34m  %c  - List Transports\t\t\t   \033[0;36mResidence: %s\n", LIST_TRANSPORTS, logged_account->residence);
-		printf("\t\033[0;34m  ESC - Back");
+		printf("\t\033[0;34m  %c - Collect Transports\n", COLLECT_TRANSPORTS);
+		printf("\t\033[0;34m  ESC - Back\n");
 		transport_menu_option = _getch();
 		transport_menu_option = toupper(transport_menu_option);
 		switch (transport_menu_option) {
@@ -322,6 +323,12 @@ void transport_menu(ListElem* transports, ListElem* accounts, account_info* logg
 			break;
 		case LIST_TRANSPORTS:
 			list_transport_menu(transports, logged_account, map);
+			break;
+		case COLLECT_TRANSPORTS:
+			system("cls");
+			collect_transports(map,*transports,logged_account->geocode, get_number_locations(map));
+			printf("Press any key to continue...\n");
+			_getch();
 			break;
 		}
 	}

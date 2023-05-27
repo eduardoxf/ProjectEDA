@@ -1,9 +1,9 @@
-125:2:0:0:///recuar.filho.rugas:
-123:1:100:250:///sordidamente.tilintar.pisando:
+125:2:40:0:///recuar.filho.rugas:
+122:1:100:250:///sordidamente.tilintar.pisando:
 1:2:96:213:///juiz.axila.cera:
-2:1:100:250:///sordidamente.tilintar.pisando:
-123:2:99:34:///juiz.axila.cera:
+2:1:10:250:///sordidamente.tilintar.pisando:
+123:2:30:34:///juiz.axila.cera:
 456:2:100:125:///juiz.axila.cera:
-20:2:100:125:///cremosas.estojos.ovos:
+20:2:30:125:///cremosas.estojos.ovos:
 31:2:100:125:///envelhecer.puseram.sustar:
-56:2:100:125:///bandear.pondero.reluzindo:
+56:2:49:125:///bandear.pondero.reluzindo:

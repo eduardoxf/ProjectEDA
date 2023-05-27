@@ -148,3 +148,19 @@ void copiarVerticesInvertido(Grafo* destino, Grafo origem) {
 	}
 }
 
+/** @brief Finds the vertex in the graph based on its geocode.
+*
+* @param g - The graph in which to search for the vertex.
+* @param geocode - The geocode of the vertex to find.
+*
+* @return The vertex found, or -1 if not found. */
+Grafo encontrarVertice(Grafo g, char* geocode) {
+
+	while (g != NULL) {
+		if (strcmp(g->vertice, geocode) == 0) {
+			return g;
+		}
+		g = g->seguinte;
+	}
+	return -1;
+}
